@@ -1,0 +1,3 @@
+"async and await make promises easier to write"
+    1. async makes a function return a Promise
+    2. await makes a function wait for a Promise
