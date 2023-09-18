@@ -5,7 +5,8 @@ const config = require('./config/database');
 const contractRoutes = require('./routes/contractRoutes');
 const stockRoutes = require('./routes/stockRoutes'); 
 const materialRoutes = require('./routes/materialRoutes');
-const employeeRoutes = require('./routes/employeeRoutes')
+const employeeRoutes = require('./routes/employeeRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes')
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use('/api/contracts', contractRoutes);
 app.use('/api/stocks', stockRoutes);
 app.use('/api/materials', materialRoutes);
 app.use('/api/employees', employeeRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 // Start server
 const port = process.env.PORT || 3000;

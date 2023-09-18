@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const workController = require('../controllers/workController');
+const workDoneController = require('../controllers/workDoneController');
 
-// Create a new work record
-router.post('/', workController.createWorkRecord);
+// Define routes for creating work records
+router.post('/', workDoneController.createWorkRecord);
 
 module.exports = router;

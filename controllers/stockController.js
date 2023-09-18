@@ -67,11 +67,7 @@ exports.deleteStock = async (req, res) => {
     }
 }
 
-  
-// Add more controller functions as needed for Table 2 or other stock-related operations
-
 // Controller function to get data from Table2
-
 exports.getTable2Data = async (req, res) => {
     try {
         const stockTable2Records= await StockTable2.find();

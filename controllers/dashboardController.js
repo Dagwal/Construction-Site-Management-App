@@ -1,45 +1,40 @@
-const {WorkDone} = require('../models/WorkDone');
+const WorkDone = require('../models/WorkDone');
 
-// Controller function to get overall progress
+// Function to calculate overall progress
 exports.getOverallProgress = async (req, res) => {
   try {
-    // Calculate overall progress logic goes here
-    // You need to query the database and perform calculations as per your requirements
-    
-    // For example, let's say you want to calculate the total cost of all work records
-    const totalCost = await WorkDone.aggregate([
-      {
-        $group: {
-          _id: null,
-          totalCost: { $sum: { $multiply: ['$unitPrice', '$measurement'] } },
-        },
-      },
-    ]);
+    const totalRecords = await WorkDone.countDocuments({});
+    const completedRecords = await WorkDone.countDocuments({ status: 'Completed' });
 
-    if (totalCost.length > 0) {
-      const overallProgress = totalCost[0].totalCost;
-      res.json({ overallProgress });
-    } else {
-      res.json({ overallProgress: 0 });
-    }
+    const overallProgress = (completedRecords / totalRecords) * 100;
+
+    res.json({ overallProgress });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Server error' });
   }
 };
 
-// Controller function to get progress by each item
+// Function to calculate progress by each item
 exports.getProgressByItem = async (req, res) => {
   try {
-    // Calculate progress by item logic goes here
-    // You need to query the database and perform calculations as per your requirements
-    
-    // For example, let's say you want to calculate the total cost for each item
     const progressByItem = await WorkDone.aggregate([
       {
         $group: {
-          _id: '$itemNumber',
-          totalCost: { $sum: { $multiply: ['$unitPrice', '$measurement'] } },
+          _id: '$itemNumber', // Group by itemNumber
+          total: { $sum: 1 },
+          completed: {
+            $sum: {
+              $cond: [{ $eq: ['$status', 'Completed'] }, 1, 0],
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          itemNumber: '$_id',
+          progress: { $multiply: [{ $divide: ['$completed', '$total'] }, 100] },
         },
       },
     ]);
