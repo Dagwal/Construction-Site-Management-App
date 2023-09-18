@@ -8,4 +8,5 @@ const contractSchema = new mongoose.Schema({
   unitPrice: Number,
 });
 
-module.exports = mongoose.model('Contract', contractSchema);
+const ContractTable = mongoose.model('Contract', contractSchema);
+module.exports = { ContractTable }
