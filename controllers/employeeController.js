@@ -30,10 +30,10 @@ exports.getEmployeeById = async (req, res) => {
 exports.createEmployee = async (req, res) => {
     try {
         // Extract data from the request body
-        const { name, proficiency, salary, workDays } = req.body;
+        const { name, proficiency, salary, Attendance, date } = req.body;
         // Create a new Employee in Employeetable
         const newEmployee = await EmployeeTable.create({
-            name, proficiency, salary, workDays
+            name, proficiency, salary, Attendance, date
         });
         res.json(newEmployee)
     } catch (err) {
@@ -46,10 +46,10 @@ exports.createEmployee = async (req, res) => {
 exports.updateEmployeeById = async (req, res) => {
     try {
         const updatedEmployee = await EmployeeTable.findByIdAndUpdate(
-            req.params.id,
-            req.body,
+            req.params.id, 
+            req.body, 
             { new: true },
-        );
+        ); 
 
         if (!updatedEmployee) {
             return res.status(404).json({ error: "Employee not found" })

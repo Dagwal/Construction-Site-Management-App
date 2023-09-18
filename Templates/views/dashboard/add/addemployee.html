@@ -64,7 +64,7 @@
                     <div class="position-sticky pt-3">
                       <ul class="nav flex-column">
                         <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="../dashboard.html">
+                          <a class="nav-link" aria-current="page" href="/dashboard">
                             <span data-feather="home"></span>
                             Dashboard
                           </a>
@@ -109,7 +109,7 @@
                       </h6>
                       <ul class="nav flex-column mb-2">
                         <li class="nav-item">
-                          <a class="nav-link" href="/contract/addcontract">
+                          <a class="nav-link" href="/contract/addContract">
                             <span data-feather="file-text"></span>
                             Add Contract
                           </a>
@@ -137,7 +137,7 @@
                   </nav>
                     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
                     <div class="container ">
-                    <form action="#" method="post" class="insert-form ">
+                    <form action="http://localhost:3000/api/employees/" method="post" class="insert-form ">
                         <hr>
                         <h1 class="text-center">Dynamically add input</h1>
             
@@ -153,14 +153,16 @@
             
                                         
             
-                                        <th>item no.</th>
+                                        <th>Name</th>
             
-                                        <th>material name</th>
+                                        <th>Proficiency</th>
         
-                                        <th>material type or name</th>
+                                        <th>Salary</th>
         
-                                        <th>quantity</th>
-        
+                                        <th>Attendance</th>
+                                        
+                                        <th>Date</th>
+
                                         <th>Remove</th>
             
                                     </tr>
@@ -169,13 +171,15 @@
             
                                         
             
-                                        <td><input type="text" class="form-control" name="name[]" required></td>
+                                        <td><input type="text" class="form-control" name="name" required></td>
             
-                                        <td><input type="text" class="form-control" name="name[]" required></td>
+                                        <td><input type="text" class="form-control" name="proficiency" required></td>
         
-                                        <td><input type="text" class="form-control" name="name[]" required></td>
+                                        <td><input type="text" class="form-control" name="salary" required></td>
         
-                                        <td><input type="number" class="form-control" name="name[]" required></td>
+                                        <td><input type="text" class="form-control" name="Attendance" required></td>
+
+                                        <td><input type="date" class="form-control" name="date" required></td>
         
                                         <td><input class="btn btn-danger" name="remove" id="remove" value="Remove" type="button"></td>
             
@@ -204,7 +208,7 @@
                         </div>
             
                     </form>
-            
+        
                 </div>
                     </main>
                 

@@ -1,20 +1,20 @@
 const mongoose = require('mongoose');
 
-const workDaySchema = new mongoose.Schema({
-  date: {
-    type: Date,
-    required: true,
-  },
-  hoursWorked: {
-    type: Number,
-    required: true,
-  },
-  attendanceStatus: {
-    type: String,
-    enum: ['Present', 'Leave'],
-    required : true,
-  },
-});
+// const workDaySchema = new mongoose.Schema({
+//   date: {
+//     type: Date,
+//     required: true,
+//   },
+//   hoursWorked: {
+//     type: Number,
+//     required: true,
+//   },
+//   attendanceStatus: {
+//     type: String,
+//     enum: ['Present', 'Absent'],
+//     required : true,
+//   },
+// });
 
 const employeeSchema = new mongoose.Schema({
   name: {
@@ -30,7 +30,17 @@ const employeeSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  workDays: [workDaySchema], // Array of workDay documents
+  Attendance: {
+    type: String,
+    enum: ['Present', 'Absent'],
+    required : true,
+  },
+  date: {
+    type: Date,
+    required: true,
+  },
+  
+  // Array of workDay documents
 });
 
 const EmployeeTable = mongoose.model('Employee', employeeSchema);

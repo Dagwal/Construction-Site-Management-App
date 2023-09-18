@@ -15,6 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     
 
@@ -171,8 +172,6 @@
             
                                     <tr>
             
-                                        
-            
                                         <td><input type="text" class="form-control" name="itemNumber" required></td>
             
                                         <td><input type="text" class="form-control" name="description" required></td>
@@ -210,6 +209,7 @@
                         </div>
             
                     </form>
+
             
                 </div>
                     </main>
@@ -242,7 +242,7 @@
             $(document).ready(function() {
 
 
-                var html = '<tr><td><input class="form-control" type="text" name="name[]" required></td><td><input class="form-control" type="text" name="name[]" required></td><td><input class="form-control" type="text" name="name[]" required></td><td><input class="form-control" type="text" name="name[]" required></td><td><input class="btn btn-danger" id="remove" type="button" name="remove" value="Remove" tabindex="-1"></td></tr>';
+                var html = '<tr><td><input class="form-control" type="text" name="name[]" required></td><td><input class="form-control" type="text" name="name[]" required></td><td><input class="form-control" type="text" name="name[]" required></td><td><input class="form-control" type="text" name="name[]" required></td><td><input class="form-control" type="text" name="name[]" required></td><td><input class="btn btn-danger" id="remove" type="button" name="remove" value="Remove" tabindex="-1"></td></tr>';
                 var max = 10;
 
                 var x = 1;
@@ -313,5 +313,6 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
         <script src="../../../public/dashboard/dashboard.js"></script>
         <script src="../../../public/main.js"></script>
+
     </body>
 </html>
