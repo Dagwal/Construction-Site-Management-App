@@ -16,12 +16,13 @@ exports.getAllContracts = async (req, res) => {
 exports.createContract = async (req, res) => {
     try {
         // Extract the data from the request body
-        const { itemNumber, description, unit, quantity, unitPrice } = req.body;
+        const { itemNumber, buildingComponent, itemName, unit, quantity, unitPrice } = req.body;
 
         // Create a new contract entry in ContractTable
         const newContract = await ContractTable.create({
             itemNumber,
-            description,
+            buildingComponent,
+            itemName,
             unit,
             quantity,
             unitPrice
@@ -31,7 +32,7 @@ exports.createContract = async (req, res) => {
         console.error(error);
         res.status(500).json({ error: 'Server error' });
     }
-}
+};
 
 // Controller function to update a contract entry in ContractTable by ID
 exports.updateContract = async (req, res) => {

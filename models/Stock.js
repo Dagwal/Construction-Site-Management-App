@@ -13,7 +13,7 @@ const stockTable1Schema = new mongoose.Schema({
 const stockTable2Schema = new mongoose.Schema({
   materialName: String, // Foreign Key referencing Material Name Table
   materialTypeSize: String, // Foreign Key referencing Material Type/Size Table
-  totalQuantity: Number,
+  totalQuantity: Number, // => Automatically Generated from Table1 stock item !!
   lastUpdatedDate: { type: Date, default: Date.now }, // Automatically generated
 });
 

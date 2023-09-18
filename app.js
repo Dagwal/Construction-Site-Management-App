@@ -28,7 +28,8 @@ app.use('/api/contracts', contractRoutes);
 app.use('/api/stocks', stockRoutes);
 app.use('/api/materials', materialRoutes);
 app.use('/api/employees', employeeRoutes);
-app.use('/api/dashboard', dashboardRoutes);
+
+// app.use('/api/dashboard', dashboardRoutes);
 
 // Start server
 const port = process.env.PORT || 3000;

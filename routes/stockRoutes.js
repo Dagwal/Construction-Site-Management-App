@@ -11,9 +11,9 @@ router.delete('/:id', stockController.deleteStock); // DELETE a stock entry in T
 
 // Define routes for retrieving, inserting, updating, and deleting data for Table 2
 router.get('/table2', stockController.getTable2Data); // GET all data from Table 2
-router.post('/table2', stockController.createTable2Entry); // POST a new entry to Table 2
-router.put('/table2/:id', stockController.updateTable2Entry); // PUT (update) an entry in Table 2 by ID
-router.delete('/table2/:id', stockController.deleteTable2Entry); // DELETE an entry in Table 2 by ID
+// router.post('/table2', stockController.createTable2Entry); // POST a new entry to Table 2
+// router.put('/table2/:id', stockController.updateTable2Entry); // PUT (update) an entry in Table 2 by ID
+// router.delete('/table2/:id', stockController.deleteTable2Entry); // DELETE an entry in Table 2 by ID
 
 module.exports = router;
 
