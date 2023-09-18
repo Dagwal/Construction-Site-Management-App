@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 
 const contractSchema = new mongoose.Schema({
   itemNumber: String,
-  buildingComponent: String,
-  itemName: String,
+  description: String,
   unit: String,
   quantity: Number,
   unitPrice: Number,

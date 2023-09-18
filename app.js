@@ -8,6 +8,7 @@ const materialRoutes = require('./routes/materialRoutes');
 const employeeRoutes = require('./routes/employeeRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes')
 
+const path = require('path')
 const app = express();
 
 // Body parser middleware
@@ -23,7 +24,54 @@ mongoose.connection.on('error', (err) => {
   console.error(`MongoDB connection error: ${err}`);
 });
 
-// Routes
+app.use(express.static(path.join(__dirname, 'Templates')));
+
+// Define a route for the landing page
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'Templates', 'views', 'landing', 'landing.html'));
+});
+
+// Define a route for the dashboard page
+app.get('/dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, 'Templates', 'views', 'dashboard', 'dashboard.html'));
+});
+
+// Define a route for the contract page
+app.get('/contracts', (req, res) => {
+  res.sendFile(path.join(__dirname, 'Templates', 'views', 'dashboard', 'contracts.html'));
+});
+
+// Define a route for the employees page
+app.get('/employee', (req, res) => {
+  res.sendFile(path.join(__dirname, 'Templates', 'views', 'dashboard', 'employee.html'));
+});
+
+// Define a route for the stocks page
+app.get('/stocks', (req, res) => {
+  res.sendFile(path.join(__dirname, 'Templates', 'views', 'dashboard', 'stocks.html'));
+});
+
+// Define a route for the stocks page
+app.get('/contract/addContract', (req, res) => {
+  res.sendFile(path.join(__dirname, 'Templates', 'views', 'dashboard', 'add', 'addcontract.html'));
+});
+
+// Define a route for the stocks page
+app.get('/stock/addStock', (req, res) => {
+  res.sendFile(path.join(__dirname, 'Templates', 'views', 'dashboard', 'add', 'addstock.html'));
+});
+
+// Define a route for the stocks page
+app.get('/employee/addEmployee', (req, res) => {
+  res.sendFile(path.join(__dirname, 'Templates', 'views', 'dashboard', 'add', 'addemployee.html'));
+});
+
+// Define a route for the stocks page
+app.get('/works/addWorks', (req, res) => {
+  res.sendFile(path.join(__dirname, 'Templates', 'views', 'dashboard', 'add', 'addworks.html'));
+});
+
+// Routes 
 app.use('/api/contracts', contractRoutes);
 app.use('/api/stocks', stockRoutes);
 app.use('/api/materials', materialRoutes);
@@ -36,3 +84,14 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+
+// // Serve static HTML files from the 'Template' directory
+// app.use(express.static(path.join(__dirname, 'Templates' )));
+
+
+
+// Serve static files from the 'Templates/public' directory
+// app.use(express.static(path.join(__dirname, 'Templates', 'views')));
+  
+// Serve HTML files directly from the 'views' directory
