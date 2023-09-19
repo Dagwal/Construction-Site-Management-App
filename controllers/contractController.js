@@ -4,13 +4,13 @@ const { ContractTable } = require('../models/Contract');
 // Controller function to get all contract from ContractTable
 exports.getAllContracts = async (req, res) => {
     try {
-        const contractRecords = await ContractTable.find();
-        res.json(contractRecords);
+      const contractRecords = await ContractTable.find();
+      res.render('views/dashboard/contracts', { contractRecords });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Server error' })
+      console.error(error);
+      res.status(500).json({ error: 'Server error' });
     }
-};
+  };
 
 // Controller function to create a new contract entry in ContractTable
 exports.createContract = async (req, res) => {

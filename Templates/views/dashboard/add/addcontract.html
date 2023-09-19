@@ -157,30 +157,37 @@
             
                                         <th>item no.</th>
             
-                                        <th>Description</th>
+                                        <th>Building Component</th>
+        
+                                        <th>Item Name</th>
         
                                         <th>Unit</th>
-        
-                                        <th>quantity</th>
 
-                                        <th>Unit Price</th>
+                                        <th>Quantity</th>
                                         
+                                        <th>Unit Price</th>
+
                                         <th>Remove</th>
 
-
+                                        <!-- <th>Action</th> -->
                                     </tr>
             
                                     <tr>
             
-                                        <td><input type="text" class="form-control" name="itemNumber" required></td>
+                                        <td><input type="number" class="form-control" name="itemNumber" required></td>
             
-                                        <td><input type="text" class="form-control" name="description" required></td>
+                                        <td><input type="text" class="form-control" name="buildingComponent" required></td>
+        
+                                        <td><input type="text" class="form-control" name="itemName" required></td>
         
                                         <td><input type="text" class="form-control" name="unit" required></td>
-        
+
                                         <td><input type="number" class="form-control" name="quantity" required></td>
 
-                                        <td><input type="number" class="form-control" name="unitPrice" required></td>
+                                        <td><select type="number" class="form-control" name="unitPrice" required>
+                                            <option value="1">100</option>
+                                            <option value="2">200</option>
+                                        </select></td>
         
                                         <td><input class="btn btn-danger" name="remove" id="remove" value="Remove" type="button"></td>
             
@@ -242,7 +249,7 @@
             $(document).ready(function() {
 
 
-                var html = '<tr><td><input class="form-control" type="text" name="name[]" required></td><td><input class="form-control" type="text" name="name[]" required></td><td><input class="form-control" type="text" name="name[]" required></td><td><input class="form-control" type="text" name="name[]" required></td><td><input class="form-control" type="text" name="name[]" required></td><td><input class="btn btn-danger" id="remove" type="button" name="remove" value="Remove" tabindex="-1"></td></tr>';
+                var html = '<tr><td><input class="form-control" type="number" name="itemNumber[]" required></td><td><input class="form-control" type="text" name="buildingComponent[]" required></td><td><input class="form-control" type="text" name="itemName[]" required></td><td><input class="form-control" type="text" name="unit[]" required></td><td><input class="form-control" type="number" name="quantity[]" required></td><td><select type="number" class="form-control" name="unitPrice" required><option value="1">100</option><option value="2">200</option></select></td><td><input class="btn btn-danger" id="remove" type="button" name="remove" value="Remove" tabindex="-1"></td></tr>';
                 var max = 10;
 
                 var x = 1;
@@ -316,3 +323,4 @@
 
     </body>
 </html>
+

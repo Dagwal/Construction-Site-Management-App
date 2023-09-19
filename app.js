@@ -7,12 +7,15 @@ const stockRoutes = require('./routes/stockRoutes');
 const materialRoutes = require('./routes/materialRoutes');
 const employeeRoutes = require('./routes/employeeRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes')
+const contractController = require('./controllers/contractController');
 
 const path = require('path')
 const app = express();
 
 // Body parser middleware
 app.use(bodyParser.json());
+app.set('view engine', 'ejs');
+app.set('views', './Templates');
 
 // Connect to MongoDB
 mongoose.connect(config.uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -37,8 +40,8 @@ app.get('/dashboard', (req, res) => {
 });
 
 // Define a route for the contract page
-app.get('/contracts', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Templates', 'views', 'dashboard', 'contracts.html'));
+app.get('/contracts', async (req, res) => {
+  const contractRecords = await contractController.getAllContracts(req, res);
 });
 
 // Define a route for the employees page

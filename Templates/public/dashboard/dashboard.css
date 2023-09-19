@@ -228,3 +228,8 @@ body {
   width: 100%;
 
 }
+
+select.form-control:not([size]):not([multiple]) {
+  height: 37.6px;
+  width: 155.89px;
+}
