@@ -15,7 +15,7 @@ const app = express();
 // Body parser middleware
 app.use(bodyParser.json());
 app.set('view engine', 'ejs');
-app.set('views', './Templates');
+app.set('views', './Templates/views/');
 
 // Connect to MongoDB
 mongoose.connect(config.uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 
 // Define a route for the dashboard page
 app.get('/dashboard', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Templates', 'views', 'dashboard', 'dashboard.html'));
+  res.render('dashboard/dashboard');
 });
 
 // Define a route for the contract page
@@ -46,32 +46,33 @@ app.get('/contracts', async (req, res) => {
 
 // Define a route for the employees page
 app.get('/employee', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Templates', 'views', 'dashboard', 'employee.html'));
+  res.render( 'dashboard/employee');
 });
 
 // Define a route for the stocks page
 app.get('/stocks', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Templates', 'views', 'dashboard', 'stocks.html'));
+  res.render('dashboard/stocks');
 });
 
 // Define a route for the stocks page
 app.get('/contract/addContract', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Templates', 'views', 'dashboard', 'add', 'addcontract.html'));
+  res.render('dashboard/add/addcontract');
+  
 });
 
 // Define a route for the stocks page
 app.get('/stock/addStock', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Templates', 'views', 'dashboard', 'add', 'addstock.html'));
+  res.render('dashboard/add/addstock');
 });
 
 // Define a route for the stocks page
 app.get('/employee/addEmployee', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Templates', 'views', 'dashboard', 'add', 'addemployee.html'));
+  res.render('dashboard/add/addemployee');
 });
 
 // Define a route for the stocks page
 app.get('/works/addWorks', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Templates', 'views', 'dashboard', 'add', 'addworks.html'));
+  res.render('dashboard/add/addworks');
 });
 
 // Routes 

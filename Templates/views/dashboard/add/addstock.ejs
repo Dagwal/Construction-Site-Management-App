@@ -15,7 +15,6 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     
 
@@ -46,7 +45,7 @@
   </head>
     <body>
         
-            <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+            <!-- <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
             <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a>
             <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -57,11 +56,11 @@
                 <a class="nav-link px-3" href="#">Sign out</a>
                 </div>
             </div>
-            </header>
-
+            </header> -->
+            <%- include('../partials/header.ejs') %>
             <div class="container-fluid">
             <div class="row">
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <!-- <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                     <div class="position-sticky pt-3">
                       <ul class="nav flex-column">
                         <li class="nav-item">
@@ -110,13 +109,13 @@
                       </h6>
                       <ul class="nav flex-column mb-2">
                         <li class="nav-item">
-                          <a class="nav-link active" href="/contract/addContract">
+                          <a class="nav-link" href="/contract/addContract">
                             <span data-feather="file-text"></span>
                             Add Contract
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="/stock/addStock">
+                          <a class="nav-link active" href="/stock/addStock">
                             <span data-feather="file-text"></span>
                             Add Stocks
                           </a>
@@ -128,18 +127,18 @@
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="/works/addWorks">
+                          <a class="nav-link" href="/works/addworks">
                             <span data-feather="file-text"></span>
                             Record Works
                           </a>
                         </li>
                       </ul>
                     </div>
-                  </nav>
-                    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
+                  </nav> -->
+                  <%- include('../partials/nav.ejs', { currentPageName: 'add-stock' }) %>    
+                  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
                     <div class="container ">
-                      <form action="http://localhost:3000/api/contracts" method="post" class="insert-form">
-
+                    <form action="#" method="post" class="insert-form ">
                         <hr>
                         <h1 class="text-center">Dynamically add input</h1>
             
@@ -155,39 +154,29 @@
             
                                         
             
-                                        <th>item no.</th>
+                                        <th>Item No.</th>
             
-                                        <th>Building Component</th>
+                                        <th>Material Name</th>
         
-                                        <th>Item Name</th>
+                                        <th>Material Type/Size</th>
         
-                                        <th>Unit</th>
-
                                         <th>Quantity</th>
-                                        
-                                        <th>Unit Price</th>
-
+        
                                         <th>Remove</th>
-
-                                        <!-- <th>Action</th> -->
+            
                                     </tr>
             
                                     <tr>
             
-                                        <td><input type="number" class="form-control" name="itemNumber" required></td>
+                                        
             
-                                        <td><input type="text" class="form-control" name="buildingComponent" required></td>
+                                        <td><input type="text" class="form-control" name="name[]" required></td>
+            
+                                        <td><input type="text" class="form-control" name="name[]" required></td>
         
-                                        <td><input type="text" class="form-control" name="itemName" required></td>
+                                        <td><input type="text" class="form-control" name="name[]" required></td>
         
-                                        <td><input type="text" class="form-control" name="unit" required></td>
-
-                                        <td><input type="number" class="form-control" name="quantity" required></td>
-
-                                        <td><select type="number" class="form-control" name="unitPrice" required>
-                                            <option value="1">100</option>
-                                            <option value="2">200</option>
-                                        </select></td>
+                                        <td><input type="number" class="form-control" name="name[]" required></td>
         
                                         <td><input class="btn btn-danger" name="remove" id="remove" value="Remove" type="button"></td>
             
@@ -216,14 +205,14 @@
                         </div>
             
                     </form>
-
             
                 </div>
                     </main>
                 
             </div>
             </div>
-            <footer class="footer mt-auto py-3 bg-light">
+            <%- include('../partials/footer.ejs') %>
+            <!-- <footer class="footer mt-auto py-3 bg-light">
             <div class="footer-content">
                 <div class="footer-links">
                 <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
@@ -232,7 +221,7 @@
                 </div>
                 <p>&copy; 2023 MD. Construction Site Managment App. All rights reserved.</p>
             </div>
-            </footer>
+            </footer> -->
         </div>
         <!-- Optional JavaScript -->
 
@@ -249,7 +238,7 @@
             $(document).ready(function() {
 
 
-                var html = '<tr><td><input class="form-control" type="number" name="itemNumber[]" required></td><td><input class="form-control" type="text" name="buildingComponent[]" required></td><td><input class="form-control" type="text" name="itemName[]" required></td><td><input class="form-control" type="text" name="unit[]" required></td><td><input class="form-control" type="number" name="quantity[]" required></td><td><select type="number" class="form-control" name="unitPrice" required><option value="1">100</option><option value="2">200</option></select></td><td><input class="btn btn-danger" id="remove" type="button" name="remove" value="Remove" tabindex="-1"></td></tr>';
+                var html = '<tr><td><input class="form-control" type="text" name="name[]" required></td><td><input class="form-control" type="text" name="name[]" required></td><td><input class="form-control" type="text" name="name[]" required></td><td><input class="form-control" type="text" name="name[]" required></td><td><input class="btn btn-danger" id="remove" type="button" name="remove" value="Remove" tabindex="-1"></td></tr>';
                 var max = 10;
 
                 var x = 1;
@@ -319,8 +308,5 @@
         <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
         <script src="../../../public/dashboard/dashboard.js"></script>
-        <script src="../../../public/main.js"></script>
-
     </body>
 </html>
-

@@ -35,6 +35,9 @@
           font-size: 3.5rem;
         }
       }
+      .footer {
+        bottom: 0;
+      }
     </style>
 
     
@@ -43,26 +46,26 @@
   </head>
   <body>
     
-    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a>
+    <!-- <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">MD.</a>
       <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="w-100"></div>
       <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-          <a class="nav-link px-3" href="#">Sign out</a>
+          <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Sign out</a>
         </div>
       </div>
-    </header>
-
+    </header> -->
+    <%- include('./partials/header.ejs') %>
     <div class="container-fluid">
       <div class="row">
-        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <!-- <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
           <div class="position-sticky pt-3">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/dashboard">
+                <a class="nav-link active" aria-current="page" href="/dashboard">
                   <span data-feather="home"></span>
                   Dashboard
                 </a>
@@ -80,7 +83,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="/employee">
+                <a class="nav-link" href="/employee">
                   <span data-feather="users"></span>
                   Employee
                 </a>
@@ -107,13 +110,13 @@
             </h6>
             <ul class="nav flex-column mb-2">
               <li class="nav-item">
-                <a class="nav-link" href="/contract/addcontract">
+                <a class="nav-link" href="/contract/addContract.html">
                   <span data-feather="file-text"></span>
                   Add Contract
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/stock/addstock">
+                <a class="nav-link" href="/stock/addStock">
                   <span data-feather="file-text"></span>
                   Add Stocks
                 </a>
@@ -132,11 +135,95 @@
               </li>
             </ul>
           </div>
-        </nav>
-
+        </nav> -->
+        <%- include('./partials/nav.ejs', { currentPageName: 'dashboard' }) %>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
           
-
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Dashboard</h1>
+            <!-- <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group me-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+              </div>
+              <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                This week
+              </button>
+            </div> -->
+          </div>
+          <section>
+            <div class="page-content page-container" id="page-content">
+              <div class="padding">
+                <div class="row container d-flex justify-content-center">
+                  <div class="col-xl-12">
+                    <div class="card proj-progress-card">
+                        <div class="card-block">
+                            <div class="row">
+                                <div class="col-xl-3 col-md-6">
+                                    <h6>Completed Work</h6>
+                                    <h5 class="m-b-30 f-w-700">532<span class="text-c-green m-l-10">+1.69%</span></h5>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-c-red" style="width:25%"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6">
+                                    <h6>Incomplete Work</h6>
+                                    <h5 class="m-b-30 f-w-700">4,569<span class="text-c-red m-l-10">-0.5%</span></h5>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-c-blue" style="width:65%"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6">
+                                    <h6>Ongoing Work</h6>
+                                    <h5 class="m-b-30 f-w-700">89%<span class="text-c-green m-l-10">+0.99%</span></h5>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-c-green" style="width:85%"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6">
+                                    <h6>Ongoing Digs</h6>
+                                    <h5 class="m-b-30 f-w-700">365<span class="text-c-green m-l-10">+0.35%</span></h5>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-c-yellow" style="width:45%"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6">
+                                  <h6>Ongoing Digs</h6>
+                                  <h5 class="m-b-30 f-w-700">365<span class="text-c-green m-l-10">+0.35%</span></h5>
+                                  <div class="progress">
+                                      <div class="progress-bar bg-c-yellow" style="width:45%"></div>
+                                  </div>
+                              </div>
+                              <div class="col-xl-3 col-md-6">
+                                <h6>Ongoing Digs</h6>
+                                <h5 class="m-b-30 f-w-700">365<span class="text-c-green m-l-10">+0.35%</span></h5>
+                                <div class="progress">
+                                    <div class="progress-bar bg-c-yellow" style="width:45%"></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                              <h6>Ongoing Digs</h6>
+                              <h5 class="m-b-30 f-w-700">365<span class="text-c-green m-l-10">+0.35%</span></h5>
+                              <div class="progress">
+                                  <div class="progress-bar bg-c-yellow" style="width:45%"></div>
+                              </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                              <h6>Ongoing Digs</h6>
+                              <h5 class="m-b-30 f-w-700">365<span class="text-c-green m-l-10">+0.35%</span></h5>
+                              <div class="progress">
+                                  <div class="progress-bar bg-c-yellow" style="width:45%"></div>
+                              </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+              </div>
+            </div>      
+          </section>
           <div class="my-4 w-100" id="myChart" width="900" height="380"></div>
 
           <h2>Section title</h2>
@@ -626,16 +713,19 @@
       </div>
     </div>
     <br>
-    <footer class="col-md-9 ms-sm-auto col-lg-10 px-md-4 footer mt-auto py-3 bg-light">
-      <div class="footer-content">
-        <div class="footer-links">
-          <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-        </div>
-        <p>&copy; 2023 MD. Construction Site Managment App. All rights reserved.</p>
+    <div id="fixed" class="">
+  </div>
+  <%- include('./partials/footer.ejs') %>
+  <!-- <footer class="col-md-9 ms-sm-auto col-lg-10 px-md-4 footer mt-auto py-3 bg-light aza">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
       </div>
-    </footer>
+      <p>&copy; 2023 MD. Construction Site Managment App. All rights reserved.</p>
+    </div>
+  </footer> -->
     <script src="../../public/landing/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
