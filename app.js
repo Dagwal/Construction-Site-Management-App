@@ -2,23 +2,34 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const config = require('./config/database');
-const contractRoutes = require('./routes/contractRoutes');
-const stockRoutes = require('./routes/stockRoutes'); 
-const materialRoutes = require('./routes/materialRoutes');
-const employeeRoutes = require('./routes/employeeRoutes');
-const dashboardRoutes = require('./routes/dashboardRoutes')
-const contractController = require('./controllers/contractController');
+const Stocks = require('./models/Stock'); // Import Stock model
+const path = require('path');
+const connectFlash = require('connect-flash');
+const session = require('express-session');
 
-const path = require('path')
 const app = express();
 
 // Body parser middleware
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.set('views', './Templates/views/');
+app.use(connectFlash());
 
+// Express session middleware
+app.use(session({
+  secret: 'your_secret_key',
+  resave: false,
+  saveUninitialized: true
+}));
 // Connect to MongoDB
-mongoose.connect(config.uri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(config.uri, { useNewUrlParser: true, useUnifiedTopology: true })
+.then(result => {
+  app.listen(3000);
+  console.log('Server started on port 3000');
+})
+.catch(err => console.log(err));
+
 mongoose.connection.on('connected', () => {
   console.log('Connected to MongoDB');
 });
@@ -57,51 +68,85 @@ app.get('/employee', (req, res) => {
 
 // Define a route for the stocks page
 app.get('/stocks', (req, res) => {
-  res.render('dashboard/stocks');
+  Stocks.find().sort({ createdAt: -1})
+  .then(result => {
+  res.render('dashboard/stocks', {stocks: result, title: 'Stocks'})
+})
+  .catch(err => console.log(err))
 });
 
-// Define a route for the stocks page
-app.get('/contract/addContract', (req, res) => {
-  res.render('dashboard/add/addcontract');
-  
-});
-
-// Define a route for the stocks page
 app.get('/stock/addStock', (req, res) => {
-  res.render('dashboard/add/addstock');
+  res.render('dashboard/add/addstock', {title: 'Add Stock', req});
 });
 
-// Define a route for the stocks page
-app.get('/employee/addEmployee', (req, res) => {
-  res.render('dashboard/add/addemployee');
+app.post('/stocks', (req, res) => {
+  const stocks = [];
+
+  if (req.body.itemNo) {
+    for (let i = 0; i < req.body.itemNo.length; i++) {
+      const stock = new Stocks({
+        itemNumber: req.body.itemNumber[i],
+        materialName: req.body.materialName[i],
+        materialTypeSize: req.body.materialTypeSize[i],
+        unit: req.body.unit[i],
+        quantity: req.body.quantity[i]
+      });
+
+      stocks.push(stock.save());
+    }
+  }
+
+  Promise.all(stocks)
+    .then(() => {
+      // Set a success message in the session
+      req.flash('success', 'The stocks have been saved successfully.');
+
+      // Redirect the user to the stocks page
+      res.redirect('/stocks');
+    })
+    .catch(err => {
+      // Set an error message in the session
+      req.flash('error', err.message);
+
+      // Redirect the user to the stocks page
+      res.redirect('/stocks');
+    });
 });
-
-// Define a route for the stocks page
-app.get('/works/addWorks', (req, res) => {
-  res.render('dashboard/add/addworks');
-});
-
-// Routes 
-app.use('/api/contracts', contractRoutes);
-app.use('/api/stocks', stockRoutes);
-app.use('/api/materials', materialRoutes);
-app.use('/api/employees', employeeRoutes);
-
-// app.use('/api/dashboard', dashboardRoutes);
-
-// Start server
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
-
-
-// // Serve static HTML files from the 'Template' directory
-// app.use(express.static(path.join(__dirname, 'Templates' )));
-
-
-
-// Serve static files from the 'Templates/public' directory
-// app.use(express.static(path.join(__dirname, 'Templates', 'views')));
+// // Define a route for the stocks page
+// app.get('/contract/addContract', (req, res) => {
+//   res.render('dashboard/add/addcontract');
   
-// Serve HTML files directly from the 'views' directory
+// });
+
+
+// // Define a route for the stocks page
+
+// // Define a route for the stocks page
+// app.get('/employee/addEmployee', (req, res) => {
+//   res.render('dashboard/add/addemployee');
+// });
+
+// // Define a route for the stocks page
+// app.get('/works/addWorks', (req, res) => {
+//   res.render('dashboard/add/addworks');
+// });
+
+// // Routes 
+// app.use('/api/contracts', contractRoutes);
+// app.use('/api/stocks', stockRoutes);
+// app.use('/api/materials', materialRoutes);
+// app.use('/api/employees', employeeRoutes);
+
+// // app.use('/api/dashboard', dashboardRoutes);
+
+
+
+// // // Serve static HTML files from the 'Template' directory
+// // app.use(express.static(path.join(__dirname, 'Templates' )));
+
+
+
+// // Serve static files from the 'Templates/public' directory
+// // app.use(express.static(path.join(__dirname, 'Templates', 'views')));
+  
+// // Serve HTML files directly from the 'views' directory

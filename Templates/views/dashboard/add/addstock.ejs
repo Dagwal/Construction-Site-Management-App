@@ -137,8 +137,13 @@
                   </nav> -->
                   <%- include('../partials/nav.ejs', { currentPageName: 'add-stock' }) %>    
                   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
+                    <% if (req.flash('success')) { %>
+                      <div class="alert alert-success">
+                        <%= req.flash('success') %>
+                      </div>
+                    <% } %>
                     <div class="container ">
-                    <form action="http://localhost:3000/api/stocks" method="post" class="insert-form ">
+                    <form action="/stocks" method="POST" class="insert-form ">
                         <hr>
                         <h1 class="text-center">Dynamically add input</h1>
             
@@ -154,15 +159,12 @@
             
                                         
             
-                                        <th>Item No.</th>
-            
-                                        <th>Material Name</th>
-        
-                                        <th>Material Type/Size</th>
-        
-                                        <th>Quantity</th>
-        
-                                        <th>Remove</th>
+                                      <th>Item Number</th>
+                                      <th>material Name</th>
+                                      <th>Material Size/Type</th>
+                                      <th>unit</th>
+                                      <th>Quantity</th>
+                                      <th>Remove</th>
             
                                     </tr>
             
@@ -170,13 +172,15 @@
             
                                         
             
-                                        <td><input type="text" class="form-control" name="itemNumber" required></td>
+                                        <td><input type="text" class="form-control" name="itemNumber[]" required></td>
             
-                                        <td><input type="text" class="form-control" name="materialName" required></td>
+                                        <td><input type="text" class="form-control" name="materialName[]" required></td>
         
-                                        <td><input type="text" class="form-control" name="materialTypeSize" required></td>
+                                        <td><input type="text" class="form-control" name="materialTypeSize[]" required></td>
+
+                                        <td><input type="text" class="form-control" name="unit[]" required></td>
         
-                                        <td><input type="number" class="form-control" name="quantity" required></td>
+                                        <td><input type="number" class="form-control" name="quantity[]" required></td>
         
                                         <td><input class="btn btn-danger" name="remove" id="remove" value="Remove" type="button"></td>
             
@@ -238,7 +242,7 @@
             $(document).ready(function() {
 
 
-                var html = '<tr><td><input class="form-control" type="text" name="name[]" required></td><td><input class="form-control" type="text" name="name[]" required></td><td><input class="form-control" type="text" name="name[]" required></td><td><input class="form-control" type="text" name="name[]" required></td><td><input class="btn btn-danger" id="remove" type="button" name="remove" value="Remove" tabindex="-1"></td></tr>';
+                var html = '<tr><td><input class="form-control" type="text" name="itemNumber[]" required></td><td><input class="form-control" type="text" name="materialName[]" required></td><td><input class="form-control" type="text" name="materialTypeSize[]" required></td><td><input class="form-control" type="text" name="unit[]" required></td><td><input class="form-control" type="number" name="quantity[]" required></td><td><input class="btn btn-danger" id="remove" type="button" name="remove" value="Remove" tabindex="-1"></td></tr>';
                 var max = 10;
 
                 var x = 1;
