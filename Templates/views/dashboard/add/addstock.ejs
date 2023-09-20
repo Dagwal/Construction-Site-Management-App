@@ -138,7 +138,7 @@
                   <%- include('../partials/nav.ejs', { currentPageName: 'add-stock' }) %>    
                   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
                     <div class="container ">
-                    <form action="#" method="post" class="insert-form ">
+                    <form action="http://localhost:3000/api/stocks" method="post" class="insert-form ">
                         <hr>
                         <h1 class="text-center">Dynamically add input</h1>
             
@@ -170,13 +170,13 @@
             
                                         
             
-                                        <td><input type="text" class="form-control" name="name[]" required></td>
+                                        <td><input type="text" class="form-control" name="itemNumber" required></td>
             
-                                        <td><input type="text" class="form-control" name="name[]" required></td>
+                                        <td><input type="text" class="form-control" name="materialName" required></td>
         
-                                        <td><input type="text" class="form-control" name="name[]" required></td>
+                                        <td><input type="text" class="form-control" name="materialTypeSize" required></td>
         
-                                        <td><input type="number" class="form-control" name="name[]" required></td>
+                                        <td><input type="number" class="form-control" name="quantity" required></td>
         
                                         <td><input class="btn btn-danger" name="remove" id="remove" value="Remove" type="button"></td>
             
@@ -194,7 +194,7 @@
             
                                     <div class="col-12 m-3">
             
-                                        <input type="submit" name="save" id="save" value="Save" class="btn btn-primary btn-block">
+                                      <input type="submit" name="save" id="save" value="Save" class="btn btn-primary btn-block">
             
                                     </div>
             

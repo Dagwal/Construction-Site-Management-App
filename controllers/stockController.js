@@ -25,7 +25,7 @@ exports.createStock = async (req, res) => {
             materialTypeSize,
             quantity,
         });
-        res.json(newStock);
+        res.redirect('/stocks');
     } catch (error) {
         console.error(error);
         res.status(500).json({error: "Server error"})
