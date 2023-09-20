@@ -31,9 +31,15 @@ app.use(express.static(path.join(__dirname, 'Templates')));
 
 // Define a route for the landing page
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Templates', 'views', 'landing', 'landing.html'));
+  res.render('landing/landing');
+});
+app.get('/login', (req, res) => {
+  res.render('users/login');
 });
 
+app.get('/signup', (req, res) => {
+  res.render('users/signup');
+});
 // Define a route for the dashboard page
 app.get('/dashboard', (req, res) => {
   res.render('dashboard/dashboard');
