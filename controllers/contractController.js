@@ -29,7 +29,7 @@ exports.createContract = async (req, res) => {
       });
   
       // Return the created contract data in JSON format
-      res.redirect('/stocks');
+      res.redirect('/contracts');
   
       // Redirect to the /contracts page
       
