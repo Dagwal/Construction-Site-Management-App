@@ -4,35 +4,40 @@ const { ContractTable } = require('../models/Contract');
 // Controller function to get all contract from ContractTable
 exports.getAllContracts = async (req, res) => {
     try {
-        const contractRecords = await ContractTable.find();
-        res.json(contractRecords);
+      const contractRecords = await ContractTable.find();
+      res.render('dashboard/contracts', { contractRecords });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Server error' })
+      console.error(error);
+      res.status(500).json({ error: 'Server error' });
     }
-};
+  };
 
 // Controller function to create a new contract entry in ContractTable
 exports.createContract = async (req, res) => {
     try {
-        // Extract the data from the request body
-        const { itemNumber, buildingComponent, itemName, unit, quantity, unitPrice } = req.body;
-
-        // Create a new contract entry in ContractTable
-        const newContract = await ContractTable.create({
-            itemNumber,
-            buildingComponent,
-            itemName,
-            unit,
-            quantity,
-            unitPrice
-        });
-        res.json(newContract)
+      // Extract the data from the request body
+      const { itemNumber, buildingComponent, itemName, unit, quantity, unitPrice } = req.body;
+  
+      // Create a new contract entry in ContractTable
+      const newContract = await ContractTable.create({
+        itemNumber,
+        buildingComponent,
+        itemName,
+        unit,
+        quantity,
+        unitPrice
+      });
+  
+      // Return the created contract data in JSON format
+      res.redirect('/contracts');
+  
+      // Redirect to the /contracts page
+      
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Server error' });
+      console.error(error);
+      res.status(500).json({ error: 'Server error' });
     }
-};
+  };
 
 // Controller function to update a contract entry in ContractTable by ID
 exports.updateContract = async (req, res) => {

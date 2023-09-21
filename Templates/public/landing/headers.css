@@ -30,3 +30,9 @@
 .dropdown-toggle {
   outline: 0;
 }
+
+header {
+  position: relative;
+  background-color: #e3e4e6;
+  z-index: 1071;
+}

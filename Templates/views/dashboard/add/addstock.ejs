@@ -45,7 +45,7 @@
   </head>
     <body>
         
-            <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+            <!-- <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
             <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a>
             <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -56,11 +56,11 @@
                 <a class="nav-link px-3" href="#">Sign out</a>
                 </div>
             </div>
-            </header>
-
+            </header> -->
+            <%- include('../partials/header.ejs') %>
             <div class="container-fluid">
             <div class="row">
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <!-- <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                     <div class="position-sticky pt-3">
                       <ul class="nav flex-column">
                         <li class="nav-item">
@@ -134,10 +134,11 @@
                         </li>
                       </ul>
                     </div>
-                  </nav>
-                    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
+                  </nav> -->
+                  <%- include('../partials/nav.ejs', { currentPageName: 'add-stock' }) %>    
+                  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
                     <div class="container ">
-                    <form action="#" method="post" class="insert-form ">
+                    <form action="http://localhost:3000/api/stocks" method="post" class="insert-form ">
                         <hr>
                         <h1 class="text-center">Dynamically add input</h1>
             
@@ -153,13 +154,13 @@
             
                                         
             
-                                        <th>item no.</th>
+                                        <th>Item No.</th>
             
-                                        <th>material name</th>
+                                        <th>Material Name</th>
         
-                                        <th>material type or name</th>
+                                        <th>Material Type/Size</th>
         
-                                        <th>quantity</th>
+                                        <th>Quantity</th>
         
                                         <th>Remove</th>
             
@@ -169,13 +170,13 @@
             
                                         
             
-                                        <td><input type="text" class="form-control" name="name[]" required></td>
+                                        <td><input type="text" class="form-control" name="itemNumber" required></td>
             
-                                        <td><input type="text" class="form-control" name="name[]" required></td>
+                                        <td><input type="text" class="form-control" name="materialName" required></td>
         
-                                        <td><input type="text" class="form-control" name="name[]" required></td>
+                                        <td><input type="text" class="form-control" name="materialTypeSize" required></td>
         
-                                        <td><input type="number" class="form-control" name="name[]" required></td>
+                                        <td><input type="number" class="form-control" name="quantity" required></td>
         
                                         <td><input class="btn btn-danger" name="remove" id="remove" value="Remove" type="button"></td>
             
@@ -193,7 +194,7 @@
             
                                     <div class="col-12 m-3">
             
-                                        <input type="submit" name="save" id="save" value="Save" class="btn btn-primary btn-block">
+                                      <input type="submit" name="save" id="save" value="Save" class="btn btn-primary btn-block">
             
                                     </div>
             
@@ -210,7 +211,8 @@
                 
             </div>
             </div>
-            <footer class="footer mt-auto py-3 bg-light">
+            <%- include('../partials/footer.ejs') %>
+            <!-- <footer class="footer mt-auto py-3 bg-light">
             <div class="footer-content">
                 <div class="footer-links">
                 <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
@@ -219,7 +221,7 @@
                 </div>
                 <p>&copy; 2023 MD. Construction Site Managment App. All rights reserved.</p>
             </div>
-            </footer>
+            </footer> -->
         </div>
         <!-- Optional JavaScript -->
 
