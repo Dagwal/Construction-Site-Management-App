@@ -141,7 +141,7 @@
                     <form action="http://localhost:3000/api/employees/" method="post" class="insert-form ">
                         <hr>
                         <h1 class="text-center">Dynamically add input</h1>
-            
+                        <a href="/logout">logout</a>
                         <hr>
             
                         <div class="input-field">
@@ -174,11 +174,18 @@
             
                                         <td><input type="text" class="form-control" name="name" required></td>
             
-                                        <td><input type="text" class="form-control" name="proficiency" required></td>
+                                        <td><select name="attendance" class="form-control">
+                                          <option value="Manager">Manager</option>
+                                          <option value="Absent">Absent</option>
+
+                                      </select></td>
         
                                         <td><input type="text" class="form-control" name="salary" required></td>
         
-                                        <td><input type="text" class="form-control" name="Attendance" required></td>
+                                        <td><select name="attendance" class="form-control">
+                                            <option value="Present">Present</option>
+                                            <option value="Absent">Absent</option>
+                                        </select></td>
 
                                         <td><input type="date" class="form-control" name="date" required></td>
         
@@ -212,9 +219,9 @@
         
                 </div>
                     </main>
-                
             </div>
             </div>
+            
             <%- include('../partials/footer.ejs') %>
             <!-- <footer class="footer mt-auto py-3 bg-light">
             <div class="footer-content">

@@ -27,11 +27,7 @@ exports.createContract = async (req, res) => {
         quantity,
         unitPrice
       });
-  
-      // Return the created contract data in JSON format
       res.redirect('/contracts');
-  
-      // Redirect to the /contracts page
       
     } catch (error) {
       console.error(error);
