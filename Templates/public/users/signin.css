@@ -49,3 +49,8 @@ body {
 .mb-4 {
   margin-bottom: 0.0rem!important;
 }
+
+.alert{
+  padding: 0rem 0rem!important;
+  margin-bottom: 0.0rem!important;
+}
