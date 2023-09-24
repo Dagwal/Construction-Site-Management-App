@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
+const material = require('./Material');
 
 // Schema for Stock Table (Table 1)
 const stockTable1Schema = new mongoose.Schema({
-  itemNumber: String, // Primary Key
-  materialName: String, // Foreign Key referencing Material Name Table
-  materialTypeSize: String, // Foreign Key referencing Material Type/Size Table
+  itemNumber: { type: mongoose.Schema.Types.ObjectId, ref: 'material', required: true }, // Foreign Key referencing Material Table
+  materialName: { type: mongoose.Schema.Types.ObjectId, ref: 'material', required: true },
+  materialTypeSize: { type: mongoose.Schema.Types.ObjectId, ref: 'material', required: true },
   quantity: Number,
   date: { type: Date, default: Date.now }, // Automatically generated
 });

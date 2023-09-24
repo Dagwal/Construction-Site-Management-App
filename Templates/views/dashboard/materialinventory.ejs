@@ -133,7 +133,7 @@
             </ul>
           </div>
         </nav> -->
-        <%- include('./partials/nav.ejs', { currentPageName: 'stocks' }) %>
+        <%- include('./partials/nav.ejs', { currentPageName: 'Material Inventory' }) %>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
           
 
@@ -165,6 +165,41 @@
                 </tbody>
               </table>
             <% } %>
+
+            
+          </div>
+          <br>
+          
+          <div class="my-4 w-100" id="myChart" width="900" height="380"></div>
+
+          <h2>Section title</h2>
+          <div class="table-responsive">
+            <% if (stockTable1Records.length > 0 ) { %>
+              <table  id="example" class="table table-striped" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Item Number</th>
+                    <th>Material Name</th>
+                    <th>Material Type/Size</th>
+                    <th>Quantity</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% stockTable1Records.forEach(stock => { %>
+                    <tr>
+                      <td><%= stock.itemNumber %></td>
+                      <td><%= stock.materialName %></td>
+                      <td><%= stock.materialTypeSize %></td>
+                      <td><%= stock.quantity %></td>
+                      <td><%= stock.date %></td>
+                    </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            <% } %>
+
+            
           </div>
         </main>
       </div>

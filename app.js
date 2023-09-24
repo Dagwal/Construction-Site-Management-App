@@ -15,13 +15,15 @@ const dashboardRoutes = require('./routes/dashboardRoutes')
 const contractController = require('./controllers/contractController');
 const stockController = require('./controllers/stockController');
 const users = require('./models/user');
+const materialController = require('./controllers/materialController');
 const Employee = require('./models/Employee');
 
 
 const path = require('path')
 const app = express();
 
-const initializePassport = require('./passport-config')
+const initializePassport = require('./passport-config');
+const { MaterialTable } = require('./models/Material');
 initializePassport(passport)
 
 
@@ -33,7 +35,8 @@ app.use(flash())
 app.use(session({
   secret: 'secret',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: { maxAge: 24 * 60 * 60 * 1000 }
 }))
 app.use(passport.initialize())
 app.use(passport.session())
@@ -103,18 +106,18 @@ app.post('/signup', ensureNotAuthenticated, async (req, res) => {
   // Redirect the user to the login page
 }});
 
-app.get('/logout', (req, res) => {
-  console.log('logout');
-  req.session.destroy(function (err) {
-    if (err) {
-    console.log(err);
-    res.status(500).send(err);
-    } else {
-      res.clearCookie('connect.sid');
-      res.redirect('/');
-    }
-});
-});
+// app.get('/logout', (req, res) => {
+//   console.log('logout');
+//   req.session.destroy(function (err) {
+//     if (err) {
+//     console.log(err);
+//     res.status(500).send(err);
+//     } else {
+//       res.clearCookie('connect.sid');
+//       res.redirect('/');
+//     }
+// });
+// });
 
 // Define a route for the dashboard page
 app.get('/dashboard', ensureAuthenticated, (req, res) => {
@@ -132,7 +135,7 @@ app.get('/employee', ensureAuthenticated, (req, res) => {
 });
 
 // Define a route for the stocks page
-app.get('/stocks', ensureAuthenticated, async (req, res) => {
+app.get('/materialinventory', ensureAuthenticated, async (req, res) => {
   const stockRecords = await stockController.getAllStocks(req, res);
 });
 
@@ -143,8 +146,11 @@ app.get('/contract/addContract', ensureAuthenticated, (req, res) => {
 });
 
 // Define a route for the stocks page
-app.get('/stock/addStock', ensureAuthenticated, (req, res) => {
-  res.render('dashboard/add/addstock');
+app.get('/stock/addStock', ensureAuthenticated, async (req, res) => {
+
+  // const materialRecords = await materialController.getAllMaterials(req, res);
+  const materialRecords = await MaterialTable.find();
+  return res.render('dashboard/add/addstock', { materials: materialRecords});
 });
 
 // Define a route for the stocks page
@@ -160,7 +166,7 @@ app.get('/works/addWorks', ensureAuthenticated, (req, res) => {
 
 // Routes 
 app.use('/api/contracts', contractRoutes);
-app.use('/api/stocks', stockRoutes);
+app.use('/api/materialinventory', stockRoutes);
 app.use('/api/materials', materialRoutes);
 app.use('/api/employees', employeeRoutes);
 

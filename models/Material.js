@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
 const materialSchema = new mongoose.Schema({
+    itemNumber: {
+        type: String,
+        required: true,
+    },
     materialName: {
         type: String,
         required: true,
-        unique: true, // Ensures uniqueness in the Material Name Table
     },
     materialTypeSize: {
         type: String,
         required: true,
-        unique: true, // Ensures uniqueness in the Material Type/Size Table
     },
 });
 

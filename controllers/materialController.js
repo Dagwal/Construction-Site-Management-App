@@ -29,18 +29,29 @@ exports.getMaterialById = async (req, res) => {
 // Controller function to create a new material entry
 exports.createMaterial = async (req, res) => {
     try {
+        const nameOfMaterial = await MaterialTable.findOne({ materialName: req.body.materialName });
+        const typeOrSizeOfMaterial = await MaterialTable.findOne({ materialTypeSize: req.body.materialTypeSize });
+        const materialRecords = await MaterialTable.find();
+        if (nameOfMaterial || typeOrSizeOfMaterial) {
+            return res.render('dashboard/add/addstock', { message: 'Material with that name, size or type already exists', materials: materialRecords})
+        }
+    
+        // if (typeOrSizeOfMaterial) {
+        //     return res.render('dashboard/add/addstock', { message: 'Material  size or type already exists' })
+        // }
         // Extract the data from the request body
-        const { materialName, materialTypeSize } = req.body;
+        const {itemNumber, materialName, materialTypeSize } = req.body;
 
         // Create a new material entry
         const newMaterial = await MaterialTable.create({
+            itemNumber,
             materialName,
             materialTypeSize,
         });
-        res.json(newMaterial);
+        res.redirect('/materialinventory');
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Server error' });
+        return res.render('dashboard/add/addstock', { message: 'Error creating material' }, 500)
     }
 };
 

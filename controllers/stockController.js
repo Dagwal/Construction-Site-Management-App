@@ -5,7 +5,7 @@ const { StockTable1, StockTable2 } = require('../models/Stock'); // Import your 
 exports.getAllStocks = async (req, res) => {
     try {
         const stockTable1Records = await StockTable1.find(); // Retrieve all records from Table 1
-        res.render('dashboard/stocks', { stockTable1Records });
+        res.render('dashboard/materialinventory', { stockTable1Records });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server error' });
@@ -25,7 +25,7 @@ exports.createStock = async (req, res) => {
             materialTypeSize,
             quantity,
         });
-        res.redirect('/stocks');
+        res.redirect('/materialinventory');
     } catch (error) {
         console.error(error);
         res.status(500).json({error: "Server error"})
@@ -44,7 +44,7 @@ exports.updateStock = async (req, res) => {
     if (!updatedStock) {
       return res.status(404).json({ error: 'Stock entry not found' });
     }
-
+    
     res.json(updatedStock);
   } catch (error) {
     console.error(error);

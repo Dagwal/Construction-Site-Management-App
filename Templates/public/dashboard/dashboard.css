@@ -230,6 +230,11 @@ body {
 }
 
 select.form-control:not([size]):not([multiple]) {
-  height: 37.6px;
-  width: 155.89px;
+  width: 100%;
+}
+
+
+
+.itemnobox {
+  width: 90px;
 }
