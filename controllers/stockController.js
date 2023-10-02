@@ -1,11 +1,12 @@
 const { trusted } = require('mongoose');
 const { StockTable1, StockTable2 } = require('../models/Stock'); // Import your Stock models
-
+const { MaterialTable } = require('../models/Material');
 // Controller function to get all stocks from Table 1
 exports.getAllStocks = async (req, res) => {
     try {
+        const materialRecords = await MaterialTable.find();
         const stockTable1Records = await StockTable1.find(); // Retrieve all records from Table 1
-        res.render('dashboard/materialinventory', { stockTable1Records });
+        res.render('dashboard/materialinventory', { stockTable1Records, materials: materialRecords });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server error' });
@@ -16,7 +17,7 @@ exports.getAllStocks = async (req, res) => {
 exports.createStock = async (req, res) => {
     try {
         // Extract data from the request body
-        const {itemNumber, materialName, materialTypeSize, quantity} = req.body
+        const {itemNumber, materialName, materialTypeSize, quantity, unitMesurment, price} = req.body
 
         // Create a new stock entry in Table 1
         const newStock = await StockTable1.create({
@@ -24,6 +25,8 @@ exports.createStock = async (req, res) => {
             materialName,
             materialTypeSize,
             quantity,
+            unitMesurment,
+            price
         });
         res.redirect('/materialinventory');
     } catch (error) {

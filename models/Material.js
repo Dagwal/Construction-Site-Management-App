@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 const materialSchema = new mongoose.Schema({
     itemNumber: {
-        type: String,
-        required: true,
+        type: Number,
     },
     materialName: {
         type: String,
-        required: true,
     },
     materialTypeSize: {
         type: String,
-        required: true,
     },
+    mesuringUnit: {
+        type: String,
+    }
 });
 
 const MaterialTable = mongoose.model('Material', materialSchema);

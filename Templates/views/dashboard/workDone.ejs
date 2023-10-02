@@ -134,10 +134,10 @@
             </ul>
           </div>
         </nav> -->
-        <%- include('./partials/nav.ejs', { currentPageName: 'contract' }) %>
+        <%- include('./partials/nav.ejs', { currentPageName: 'Works Done' }) %>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
-          <form action="http://localhost:3000/api/contracts" method="post" class="insert-form">
-
+          
+          <form action="/works/addWorks" method="post" class="insert-form ">
             <hr>
             <h1 class="text-center">Dynamically add input</h1>
 
@@ -155,22 +155,23 @@
 
                             <th>item no.</th>
 
-                            <th>Building Component</th>
+                            <th>buildingComponent</th>
 
-                            <th>Item Name</th>
+                            <th>itemName</th>
 
-                            <th>Unit</th>
+                            <th>unit</th>
 
-                            <th>Quantity</th>
-                            
-                            <th>Unit Price</th>
+                            <th>quantity</th>
+
+                            <th>unitPrice</th>
 
                             <th>Remove</th>
 
-                            <!-- <th>Action</th> -->
                         </tr>
 
                         <tr>
+
+                            
 
                             <td><input type="number" class="form-control" name="itemNumber" required></td>
 
@@ -211,13 +212,11 @@
             </div>
 
         </form>
-
-
           <div class="my-4 w-100" id="myChart" width="900" height="380"></div>
 
           <h2>Section title</h2>
           <div class="table-responsive">
-            <% if (contractRecords.length > 0 ) { %>
+            <% if (works.length > 0 ) { %>
               <table  id="example" class="table table-striped" style="width:100%">
                 <thead>
                   <tr>
@@ -227,19 +226,24 @@
                     <th>Unit</th>
                     <th>Quantity</th>
                     <th>Unit Price</th>
+                    <th>Total Price</th>
+                    <th>Date</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <% contractRecords.forEach(contract => { %>
+                  <% works.forEach(work => { %>
                     <tr>
-                      <td><%= contract.itemNumber %></td>
-                      <td><%= contract.buildingComponent %></td>
-                      <td><%= contract.itemName %></td>
-                      <td><%= contract.unit %></td>
-                      <td><%= contract.quantity %></td>
-                      <td><%= contract.unitPrice %></td>
-                      <td><a href="contracts/editcontract/<%= contract._id%>" class="btn btn-primary">Edit</a>  <a href="contracts/deletecontract/<%= contract._id%>" class="btn btn-danger">Delete</a></td>
+                      <td><%= work.itemNumber %></td>
+                      <td><%= work.buildingComponent %></td>
+                      <td><%= work.itemName %></td>
+                      <td><%= work.unit %></td>
+                      <td><%= work.quantity %></td>
+                      <td><%= work.unitPrice %></td>
+                      <td><%= work.unitPrice * work.quantity %></td>
+                      <th><%= work.date.toLocaleString({timeZone: 'Africa/Addis_Ababa'}) %></th>
+                      <td><a href="/works/editworks/<%= work._id%>" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="/works/deleteworks/<%= work._id%>" class="btn btn-danger btn-sm">  delete</a></td>
                     </tr>
                   <% }) %>
                 </tbody>

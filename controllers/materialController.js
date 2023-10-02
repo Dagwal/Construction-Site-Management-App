@@ -31,22 +31,22 @@ exports.createMaterial = async (req, res) => {
     try {
         const nameOfMaterial = await MaterialTable.findOne({ materialName: req.body.materialName });
         const typeOrSizeOfMaterial = await MaterialTable.findOne({ materialTypeSize: req.body.materialTypeSize });
+        const unit = await MaterialTable.findOne({mesuringUnit: req.body.mesuringUnit });
+        const materialNumber = await MaterialTable.findOne({ itemNumber: req.body.itemNumber });
         const materialRecords = await MaterialTable.find();
-        if (nameOfMaterial || typeOrSizeOfMaterial) {
+        if (nameOfMaterial && typeOrSizeOfMaterial && unit && materialNumber) {
             return res.render('dashboard/add/addstock', { message: 'Material with that name, size or type already exists', materials: materialRecords})
         }
     
-        // if (typeOrSizeOfMaterial) {
-        //     return res.render('dashboard/add/addstock', { message: 'Material  size or type already exists' })
-        // }
-        // Extract the data from the request body
-        const {itemNumber, materialName, materialTypeSize } = req.body;
+        
+        const {itemNumber, materialName, materialTypeSize, mesuringUnit} = req.body;
 
         // Create a new material entry
         const newMaterial = await MaterialTable.create({
             itemNumber,
             materialName,
             materialTypeSize,
+            mesuringUnit,
         });
         res.redirect('/materialinventory');
     } catch (error) {

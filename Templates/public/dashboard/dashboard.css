@@ -238,3 +238,22 @@ select.form-control:not([size]):not([multiple]) {
 .itemnobox {
   width: 90px;
 }
+
+.material {
+  width: 30%;
+  margin-bottom: 0.5 rem;
+}
+
+.addmaterial {
+  width: 50%;
+  margin-bottom: 0.5 rem;
+}
+
+.addmaterial td {
+  width: 30%;
+}
+
+td .save {
+  width: 5%;
+}
+
