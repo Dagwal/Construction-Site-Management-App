@@ -61,6 +61,15 @@ app.use(express.static(path.join(__dirname, 'Templates')));
 app.get('/', (req, res) => {
   res.render('landing/landing');
 });
+
+app.get('/contact', (req, res) => {
+  res.render('dashboard/contact')
+});
+ 
+app.get('/about', (req, res) => {
+  res.render('dashboard/about')
+})
+ 
 app.get('/login', ensureNotAuthenticated, (req, res) => {
   res.render('users/login');
 });
@@ -109,23 +118,11 @@ app.post('/signup', ensureNotAuthenticated, async (req, res) => {
   // Redirect the user to the login page
 }});
 
-// app.get('/logout', (req, res) => {
-//   console.log('logout');
-//   req.session.destroy(function (err) {
-//     if (err) {
-//     console.log(err);
-//     res.status(500).send(err);
-//     } else {
-//       res.clearCookie('connect.sid');
-//       res.redirect('/');
-//     }
-// });
-// });
-
 // Define a route for the dashboard page
 app.get('/dashboard', ensureAuthenticated, (req, res) => {
   res.render('dashboard/dashboard');
 });
+
 
 // Define a route for the contract page
 app.get('/contracts',ensureAuthenticated, async (req, res) => {

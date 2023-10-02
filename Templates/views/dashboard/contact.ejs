@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <!-- footer icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <!-- footer icons -->
+  <!-- Bootstrap core CSS -->
+  <link href="../../public/landing/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="../../public/landing/landing.css" rel="stylesheet"> <!-- a little header and for footer -->
+  <link href="../../public/landing/headers.css" rel="stylesheet"> <!-- header color -->
+  <!-- Contact Style -->
+  <link rel="stylesheet" href="../../public/landing/contact.css">
+  <style>
+    /* Additional CSS to make columns equal in height and reduce spacing */
+    .contact-section {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .contact-info {
+      background-color: #f8f9fa;
+      /* Background color for contact info */
+      padding: 20px;
+      margin-right: 10px;
+      /* Adjust the margin */
+    }
+
+    .contact-form {
+      background-color: #f8f9fa;
+      padding: 20px;
+      margin-left: 10px;
+      /* Adjust the margin */
+    }
+
+    /* Center align contact information icons */
+    .contact-info i {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header
+    class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+      <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+        <use xlink:href="#bootstrap" />
+      </svg>
+    </a>
+
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+      <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
+      <li><a href="/about" class="nav-link px-2 link-dark">About</a></li>
+      <li><a href="/contact" class="nav-link px-2 link-dark">Contact</a></li>
+    </ul>
+
+    <div class="col-md-3 text-end">
+      <a href="/login"><button type="button" class="btn btn-outline-primary me-2">Login</button></a>
+      <a href="/signup"><button type="button" class="btn btn-primary">Sign-up</button></a>
+    </div>
+  </header>
+
+  <section class="container mt-5">
+    <h1 class="display-4">Contact Us</h1>
+    <div class="contact-section">
+      <!-- Contact Information -->
+      <div class="col-md-6 contact-info">
+        <h3>Contact Information</h3>
+        <div class="mb-3">
+          <i class="fas fa-envelope"></i>
+          <span>Email:</span>
+          <p>dagimwalelegne@gmail.com</p>
+        </div>
+
+        <div class="mb-3">
+          <i class="fas fa-phone"></i>
+          <span>Phone:</span>
+          <p>0999888778</p>
+        </div>
+
+        <div class="mb-3">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Address:</span>
+          <p>Addis Ababa</p>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="col-md-6 contact-form">
+        <h3>Send Us a Message</h3>
+        <form id="contactForm" action="mailto:dagimwalelegne@gmail.com" method="post" enctype="text/plain">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="message" class="form-label">Message:</label>
+            <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <br>
+  <br>
+  <footer class="ms-sm-auto px-md-4 footer mt-auto py-3">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+      </div>
+      <p>&copy; 2023 MD. Construction Site Management App. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+
+</html>

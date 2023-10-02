@@ -1,0 +1,127 @@
+<!-- views/about.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>About Us</title>
+    <!-- footer icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <!-- footer icons -->
+    <!-- Bootstrap core CSS -->
+    <link href="../../public/landing/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../../public/landing/landing.css" rel="stylesheet"> <!-- a little header and for footer -->
+    <link href="../../public/landing/headers.css" rel="stylesheet"> <!-- header color -->
+    <!-- About Style -->
+    <link rel="stylesheet" href="../../public/landing/about.css">
+
+</head>
+
+<body>
+    <header
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                <use xlink:href="#bootstrap" />
+            </svg>
+        </a>
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
+            <li><a href="/about" class="nav-link px-2 link-dark">About</a></li>
+            <li><a href="/contact" class="nav-link px-2 link-dark">Contact</a></li>
+
+        </ul>
+
+        <div class="col-md-3 text-end">
+            <a href="/login"><button type="button" class="btn btn-outline-primary me-2">Login</button></a>
+            <a href="/signup"><button type="button" class="btn btn-primary">Sign-up</button></a>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="container mt-5">
+        <h1 class="display-4">About Us</h1>
+
+        <!-- Sample Content -->
+        <hr width="720px">
+        <br>
+        <p style="padding: 10px;">
+            As a team, we embarked on this project driven by our shared passion for innovative solutions and a desire to
+            push
+            the boundaries of what is possible. Our motivation goes beyond fulfilling the requirements set by Holberton
+            School;
+            it is rooted in our genuine enthusiasm for creating impactful projects.
+        </p>
+        <p style="padding: 10px;">
+            Throughout the development process, we aimed to deliver a portfolio project that showcases our skills and
+            capabilities as aspiring professionals in the tech industry. This project serves as a testament to our
+            dedication,
+            hard work, and commitment to excellence.
+        </p>
+        <p style="padding: 10px;">
+            To learn more about Holberton School, please visit the <a href="https://www.holbertonschool.com">Holberton
+                School Website</a>.
+        </p>
+        <br>
+        <hr width="720px">
+        <h2>Meet the Team</h2>
+
+        <!-- Team Members -->
+        <div class="author">
+            <img src="../../public/MIKI.jpg" alt="Mickyas Kore">
+            <div class="author-details">
+                <h3>Mickyas Kore</h3>
+                <p>Frontend Developer</p>
+                <p>Mickyas is a talented frontend developer with a passion for creating intuitive and user-friendly
+                    interfaces. With very experience in web development, he specializes in HTML, CSS, and
+                    JavaScript. Mickyas is dedicated to delivering seamless user experiences and translating design
+                    concepts into functional and visually appealing websites.</p>
+                <p>
+                    <a href="https://www.linkedin.com/in/mikiyas-ayele" target="_blank"><i
+                            class="fab fa-linkedin"></i></a> |
+                    <a href="https://github.com/Mickykore" target="_blank"><i class="fab fa-github"></i></a> |
+                    <a href="https://twitter.com/MikiyasKore" target="_blank"><i class="fab fa-twitter"></i></a>
+                </p>
+            </div>
+        </div>
+
+        <div class="author">
+            <img src="../../public/Dagimm.jpg" alt="Dagim Wallelegne">
+            <div class="author-details">
+                <h3>Dagim Wallelegne</h3>
+                <p>Backend Developer</p>
+                <p>Dagim is a skilled backend developer with expertise in building robust and scalable web
+                    applications. He has a strong command of programming languages such as Python and Java, and he
+                    enjoys working with databases and server-side technologies. Dagim thrives on solving complex
+                    problems and optimizing application performance to deliver efficient and secure solutions.</p>
+                <p>
+                    <a href="https://linkedin.com/in/dagim-wallelgne-218860231" target="_blank"><i
+                            class="fab fa-linkedin"></i></a> |
+                    <a href="https://github.com/dagwal" target="_blank"><i class="fab fa-github"></i></a> |
+                    <a href="https://twitter.com/dagwal3" target="_blank"><i class="fab fa-twitter"></i></a>
+                </p>
+            </div>
+        </div>
+
+    </section>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <footer class=" ms-sm-auto  px-md-4 footer mt-auto py-3 ">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2023 MD. Construction Site Managment App. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

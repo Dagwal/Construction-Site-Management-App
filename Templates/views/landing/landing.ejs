@@ -1,239 +1,273 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.84.0">
-    <title>Landing</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
 
-    
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.84.0">
+  <title>Landing</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
 
-    <!-- Bootstrap core CSS -->
-<link href="../../public/landing/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
+
+  <!-- Bootstrap core CSS -->
+  <link href="../../public/landing/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
       }
+    }
+  </style>
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
+
+  <!-- Custom styles for this template -->
+  <link href="../../public/landing/landing.css" rel="stylesheet">
+  <link href="../../public/landing/headers.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
       }
-    </style>
+    }
+  </style>
+</head>
 
-    
-    <!-- Custom styles for this template -->
-    <link href="../../public/landing/landing.css" rel="stylesheet">
-    <link href="../../public/landing/headers.css" rel="stylesheet">
+<body>
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
+  <header
+    class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+      <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+        <use xlink:href="#bootstrap" />
+      </svg>
+    </a>
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-      </a>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+      <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
+      <li><a href="/about" class="nav-link px-2 link-dark">About</a></li>
+      <li><a href="/contact" class="nav-link px-2 link-dark">Contact</a></li>
 
-      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Contacts</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
-      </ul>
+    </ul>
 
-      <div class="col-md-3 text-end">
-        <a href="/login"><button type="button" class="btn btn-outline-primary me-2">Login</button></a>
-        <a href="/signup"><button type="button" class="btn btn-primary">Sign-up</button></a>
-      </div>
-    </header>
-
-<main>
-
-  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <div class="col-md-3 text-end">
+      <a href="/login"><button type="button" class="btn btn-outline-primary me-2">Login</button></a>
+      <a href="/signup"><button type="button" class="btn btn-primary">Sign-up</button></a>
     </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg> -->
+  </header>
 
-        <div class="container">
-          <div class="carousel-caption text-start">
-            <h1>Managing Construction Site</h1>
-            <p>A web app for construction site management combines project coordination, 
-              stock management, and worker supervision, streamlining construction processes, 
-              improving resource allocation, and enhancing overall project efficiency.</p>
-            <p><a class="btn btn-lg btn-primary" href="/signup">Start Managing</a></p>
+  <main>
+
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+          aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg> -->
+
+          <div class="container">
+            <div class="carousel-caption text-start">
+              <h1>Managing Construction Site</h1>
+              <p>A web app for construction site management combines project coordination,
+                stock management, and worker supervision, streamlining construction processes,
+                improving resource allocation, and enhancing overall project efficiency.</p>
+              <p><a class="btn btn-lg btn-primary" href="/signup">Start Managing</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg> -->
+
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Why use construction Managing web app</h1>
+              <p>A construction site management app facilitates
+                the transition from traditional paper-based documentation
+                and data recording to digital processes on computers.</p>
+              <p><a class="btn btn-lg btn-primary" href="#">Contact Us</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg> -->
+
+          <div class="container">
+            <div class="carousel-caption text-end">
+              <h1>One more for good measure.</h1>
+              <p>Some representative placeholder content for the third slide of this carousel.</p>
+              <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="carousel-item">
-        <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg> -->
-
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>Why use construction Managing web app</h1>
-            <p>A construction site management app facilitates 
-              the transition from traditional paper-based documentation 
-              and data recording to digital processes on computers.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Contact Us</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg> -->
-
-        <div class="container">
-          <div class="carousel-caption text-end">
-            <h1>One more for good measure.</h1>
-            <p>Some representative placeholder content for the third slide of this carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
-          </div>
-        </div>
-      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
 
 
-  <!-- Marketing messaging and featurettes
+    <!-- Marketing messaging and featurettes
   ================================================== -->
-  <!-- Wrap the rest of the page in another container to center all the content. -->
-  
-  <div class="container marketing">
+    <!-- Wrap the rest of the page in another container to center all the content. -->
 
-    <!-- Three columns of text below the carousel -->
-    <div class="row">
-      <div class="col-lg-4">
-        <svg xmlns="http://www.w3.org/2000/svg" height="100" viewBox="0 0 24 24" width="100" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-        <h2>Documentation</h2>
-        <p>Easily and effectively create, store, and access essential project documents and reports.</p>
-        <!-- <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p> -->
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <svg xmlns="http://www.w3.org/2000/svg" height="100" viewBox="0 0 24 24" width="100" fill="#000000"><path d="M0 0h24v24H0zm18.31 6l-2.76 5z" fill="none"/><path d="M11 9h2V6h3V4h-3V1h-2v3H8v2h3v3zm-4 9c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-9.83-3.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L19.42 4h-.01l-1.1 2-2.76 5H8.53l-.13-.27L6.16 6l-.95-2-.94-2H1v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.13 0-.25-.11-.25-.25z"/></svg>
+    <div class="container marketing">
 
-        <h2>Material Inventory Management</h2>
-        <p>Efficiently manage construction materials and supplies to avoid construction delays.</p>
-        <!-- <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p> -->
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="100" viewBox="0 0 24 24" width="100" fill="#000000"><g><rect fill="none" height="24" width="24"/></g><g><path d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12.88,17.76V19h-1.75v-1.29 c-0.74-0.18-2.39-0.77-3.02-2.96l1.65-0.67c0.06,0.22,0.58,2.09,2.4,2.09c0.93,0,1.98-0.48,1.98-1.61c0-0.96-0.7-1.46-2.28-2.03 c-1.1-0.39-3.35-1.03-3.35-3.31c0-0.1,0.01-2.4,2.62-2.96V5h1.75v1.24c1.84,0.32,2.51,1.79,2.66,2.23l-1.58,0.67 c-0.11-0.35-0.59-1.34-1.9-1.34c-0.7,0-1.81,0.37-1.81,1.39c0,0.95,0.86,1.31,2.64,1.9c2.4,0.83,3.01,2.05,3.01,3.45 C15.9,17.17,13.4,17.67,12.88,17.76z"/></g></svg>
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="col-lg-4">
+          <svg xmlns="http://www.w3.org/2000/svg" height="100" viewBox="0 0 24 24" width="100" fill="#000000">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+          </svg>
+          <h2>Documentation</h2>
+          <p>Easily and effectively create, store, and access essential project documents and reports.</p>
+          <!-- <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p> -->
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <svg xmlns="http://www.w3.org/2000/svg" height="100" viewBox="0 0 24 24" width="100" fill="#000000">
+            <path d="M0 0h24v24H0zm18.31 6l-2.76 5z" fill="none" />
+            <path
+              d="M11 9h2V6h3V4h-3V1h-2v3H8v2h3v3zm-4 9c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-9.83-3.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L19.42 4h-.01l-1.1 2-2.76 5H8.53l-.13-.27L6.16 6l-.95-2-.94-2H1v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.13 0-.25-.11-.25-.25z" />
+          </svg>
 
-        <h2>Cost Control</h2>
-        <p>Manage and monitor project expenses in real-time to prevent budget overruns.</p>
-        <!-- <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p> -->
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <svg xmlns="http://www.w3.org/2000/svg" height="100" viewBox="0 -960 960 960" width="100"><path d="M42-120v-112q0-33 17-62t47-44q51-26 115-44t141-18q77 0 141 18t115 44q30 15 47 44t17 62v112H42Zm80-80h480v-32q0-11-5.5-20T582-266q-36-18-92.5-36T362-320q-71 0-127.5 18T142-266q-9 5-14.5 14t-5.5 20v32Zm240-240q-66 0-113-47t-47-113h-10q-9 0-14.5-5.5T172-620q0-9 5.5-14.5T192-640h10q0-45 22-81t58-57v38q0 9 5.5 14.5T302-720q9 0 14.5-5.5T322-740v-54q9-3 19-4.5t21-1.5q11 0 21 1.5t19 4.5v54q0 9 5.5 14.5T422-720q9 0 14.5-5.5T442-740v-38q36 21 58 57t22 81h10q9 0 14.5 5.5T552-620q0 9-5.5 14.5T532-600h-10q0 66-47 113t-113 47Zm0-80q33 0 56.5-23.5T442-600H282q0 33 23.5 56.5T362-520Zm300 160-6-30q-6-2-11.5-4.5T634-402l-28 10-20-36 22-20v-24l-22-20 20-36 28 10q4-4 10-7t12-5l6-30h40l6 30q6 2 12 5t10 7l28-10 20 36-22 20v24l22 20-20 36-28-10q-5 5-10.5 7.5T708-390l-6 30h-40Zm20-70q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm72-130-8-42q-9-3-16.5-7.5T716-620l-42 14-28-48 34-30q-2-5-2-8v-16q0-3 2-8l-34-30 28-48 42 14q6-6 13.5-10.5T746-798l8-42h56l8 42q9 3 16.5 7.5T848-780l42-14 28 48-34 30q2 5 2 8v16q0 3-2 8l34 30-28 48-42-14q-6 6-13.5 10.5T818-602l-8 42h-56Zm28-90q21 0 35.5-14.5T832-700q0-21-14.5-35.5T782-750q-21 0-35.5 14.5T732-700q0 21 14.5 35.5T782-650ZM122-200h480-480Z"/></svg>
+          <h2>Material Inventory Management</h2>
+          <p>Efficiently manage construction materials and supplies to avoid construction delays.</p>
+          <!-- <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p> -->
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="100" viewBox="0 0 24 24"
+            width="100" fill="#000000">
+            <g>
+              <rect fill="none" height="24" width="24" />
+            </g>
+            <g>
+              <path
+                d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12.88,17.76V19h-1.75v-1.29 c-0.74-0.18-2.39-0.77-3.02-2.96l1.65-0.67c0.06,0.22,0.58,2.09,2.4,2.09c0.93,0,1.98-0.48,1.98-1.61c0-0.96-0.7-1.46-2.28-2.03 c-1.1-0.39-3.35-1.03-3.35-3.31c0-0.1,0.01-2.4,2.62-2.96V5h1.75v1.24c1.84,0.32,2.51,1.79,2.66,2.23l-1.58,0.67 c-0.11-0.35-0.59-1.34-1.9-1.34c-0.7,0-1.81,0.37-1.81,1.39c0,0.95,0.86,1.31,2.64,1.9c2.4,0.83,3.01,2.05,3.01,3.45 C15.9,17.17,13.4,17.67,12.88,17.76z" />
+            </g>
+          </svg>
 
-        <h2>Worker Supervision</h2>
-        <p>to monitor attendance, assign tasks, 
-          and ensure that labor resources are utilized effectively.</p>
-        <!-- <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p> -->
-      </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
+          <h2>Cost Control</h2>
+          <p>Manage and monitor project expenses in real-time to prevent budget overruns.</p>
+          <!-- <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p> -->
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <svg xmlns="http://www.w3.org/2000/svg" height="100" viewBox="0 -960 960 960" width="100">
+            <path
+              d="M42-120v-112q0-33 17-62t47-44q51-26 115-44t141-18q77 0 141 18t115 44q30 15 47 44t17 62v112H42Zm80-80h480v-32q0-11-5.5-20T582-266q-36-18-92.5-36T362-320q-71 0-127.5 18T142-266q-9 5-14.5 14t-5.5 20v32Zm240-240q-66 0-113-47t-47-113h-10q-9 0-14.5-5.5T172-620q0-9 5.5-14.5T192-640h10q0-45 22-81t58-57v38q0 9 5.5 14.5T302-720q9 0 14.5-5.5T322-740v-54q9-3 19-4.5t21-1.5q11 0 21 1.5t19 4.5v54q0 9 5.5 14.5T422-720q9 0 14.5-5.5T442-740v-38q36 21 58 57t22 81h10q9 0 14.5 5.5T552-620q0 9-5.5 14.5T532-600h-10q0 66-47 113t-113 47Zm0-80q33 0 56.5-23.5T442-600H282q0 33 23.5 56.5T362-520Zm300 160-6-30q-6-2-11.5-4.5T634-402l-28 10-20-36 22-20v-24l-22-20 20-36 28 10q4-4 10-7t12-5l6-30h40l6 30q6 2 12 5t10 7l28-10 20 36-22 20v24l22 20-20 36-28-10q-5 5-10.5 7.5T708-390l-6 30h-40Zm20-70q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm72-130-8-42q-9-3-16.5-7.5T716-620l-42 14-28-48 34-30q-2-5-2-8v-16q0-3 2-8l-34-30 28-48 42 14q6-6 13.5-10.5T746-798l8-42h56l8 42q9 3 16.5 7.5T848-780l42-14 28 48-34 30q2 5 2 8v16q0 3-2 8l34 30-28 48-42-14q-6 6-13.5 10.5T818-602l-8 42h-56Zm28-90q21 0 35.5-14.5T832-700q0-21-14.5-35.5T782-750q-21 0-35.5 14.5T732-700q0 21 14.5 35.5T782-650ZM122-200h480-480Z" />
+          </svg>
+          z
+          <h2>Worker Supervision</h2>
+          <p>to monitor attendance, assign tasks,
+            and ensure that labor resources are utilized effectively.</p>
+          <!-- <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p> -->
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
 
 
-    <!-- START THE FEATURETTES -->
+      <!-- START THE FEATURETTES -->
 
-    <hr class="featurette-divider">
+      <hr class="featurette-divider">
 
-    <div class="row featurette">
-      <div class="col-md-7">
-        <h2 class="featurette-heading">Add stock.</h2>
-        <p class="lead">Update the inventory system with materials on site and used, and record the quantity of each material. 
-          Increase the quantity of an existing inventory item, if necessary.</p>
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Add stock.</h2>
+          <p class="lead">Update the inventory system with materials on site and used, and record the quantity of each
+            material.
+            Increase the quantity of an existing inventory item, if necessary.</p>
+        </div>
+        <div class="col-md-5">
+          <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
+          <img src="../../public/Screenshot 2023-09-16 232728.png" alt="record works"
+            class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto">
+        </div>
       </div>
-      <div class="col-md-5">
-        <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
-        <img src="../../public/Screenshot 2023-09-16 232728.png" alt="record works" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto">
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+          <h2 class="featurette-heading">Add employee.</h2>
+          <p class="lead">Create an employee record in the HR system, including basic information such as name, contact
+            information, and job title.</p>
+        </div>
+        <div class="col-md-5 order-md-1">
+          <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
+          <img src="../../public/Screenshot 2023-09-16 232728.png" alt="record works"
+            class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto">
+        </div>
       </div>
-    </div>
 
-    <hr class="featurette-divider">
+      <hr class="featurette-divider">
 
-    <div class="row featurette">
-      <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading">Add employee.</h2>
-        <p class="lead">Create an employee record in the HR system, including basic information such as name, contact information, and job title.</p>
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Record works</h2>
+          <p class="lead">Recording work done daily helps you track your time, progress, and challenges, so you can
+            improve your productivity and time management skills.</p>
+        </div>
+        <div class="col-md-5">
+          <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
+          <img src="../../public/Screenshot 2023-09-16 232728.png" alt="record works"
+            class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto">
+        </div>
       </div>
-      <div class="col-md-5 order-md-1">
-        <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
-        <img src="../../public/Screenshot 2023-09-16 232728.png" alt="record works" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto">
+
+      <hr class="featurette-divider">
+
+      <!-- /END THE FEATURETTES -->
+
+    </div><!-- /.container -->
+
+
+    <!-- FOOTER -->
+    <footer class=" ms-sm-auto  px-md-4 footer mt-auto py-3 ">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2023 MD. Construction Site Managment App. All rights reserved.</p>
       </div>
-    </div>
+    </footer>
 
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-      <div class="col-md-7">
-        <h2 class="featurette-heading">Record works</h2>
-        <p class="lead">Recording work done daily helps you track your time, progress, and challenges, so you can improve your productivity and time management skills.</p>
-      </div>
-      <div class="col-md-5">
-        <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
-        <img src="../../public/Screenshot 2023-09-16 232728.png" alt="record works" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto">
-      </div>
-    </div>
-
-    <hr class="featurette-divider">
-
-    <!-- /END THE FEATURETTES -->
-
-  </div><!-- /.container -->
+  </main>
 
 
-  <!-- FOOTER -->
-  <footer class=" ms-sm-auto  px-md-4 footer mt-auto py-3 ">
-    <div class="footer-content">
-      <div class="footer-links">
-        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-      </div>
-      <p>&copy; 2023 MD. Construction Site Managment App. All rights reserved.</p>
-    </div>
-  </footer>
-  
-</main>
+  <script src="../../public/landing/bootstrap.bundle.min.js"></script>
 
 
-    <script src="../../public/landing/bootstrap.bundle.min.js"></script>
+</body>
 
-      
-  </body>
 </html>
