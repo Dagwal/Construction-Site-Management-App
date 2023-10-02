@@ -138,7 +138,7 @@
                   <%- include('../partials/nav.ejs', { currentPageName: 'record-works' }) %>    
                   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
                     <div class="container ">
-                    <form action="#" method="post" class="insert-form ">
+                    <form action="/works/addWorks" method="post" class="insert-form ">
                         <hr>
                         <h1 class="text-center">Dynamically add input</h1>
             
@@ -156,11 +156,15 @@
             
                                         <th>item no.</th>
             
-                                        <th>material name</th>
+                                        <th>buildingComponent</th>
         
-                                        <th>material type or name</th>
+                                        <th>itemName</th>
         
+                                        <th>unit</th>
+
                                         <th>quantity</th>
+
+                                        <th>unitPrice</th>
         
                                         <th>Remove</th>
             
@@ -170,13 +174,17 @@
             
                                         
             
-                                        <td><input type="text" class="form-control" name="name[]" required></td>
+                                        <td><input type="number" class="form-control" name="itemNumber" required></td>
             
-                                        <td><input type="text" class="form-control" name="name[]" required></td>
+                                        <td><input type="text" class="form-control" name="buildingComponent" required></td>
         
-                                        <td><input type="text" class="form-control" name="name[]" required></td>
+                                        <td><input type="text" class="form-control" name="itemName" required></td>
         
-                                        <td><input type="number" class="form-control" name="name[]" required></td>
+                                        <td><input type="text" class="form-control" name="unit" required></td>
+
+                                        <td><input type="number" class="form-control" name="quantity" required></td>
+        
+                                        <td><input type="number" class="form-control" name="unitPrice" required></td>
         
                                         <td><input class="btn btn-danger" name="remove" id="remove" value="Remove" type="button"></td>
             
@@ -207,6 +215,7 @@
                     </form>
             
                 </div>
+                
                     </main>
                 
             </div>

@@ -14,14 +14,19 @@ const employeeRoutes = require('./routes/employeeRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes')
 const contractController = require('./controllers/contractController');
 const stockController = require('./controllers/stockController');
+const employeeController = require('./controllers/employeeController');
 const users = require('./models/user');
-const Employee = require('./models/Employee');
-
-
+const materialController = require('./controllers/materialController');
+const { EmployeeTable } = require('./models/Employee');
+const { ContractTable } = require('./models/Contract');
 const path = require('path')
 const app = express();
 
-const initializePassport = require('./passport-config')
+const initializePassport = require('./passport-config');
+const { MaterialTable } = require('./models/Material');
+const WorkDone = require('./models/WorkDone');
+const { StockTable1, StockTable2 } = require('./models/Stock');
+
 initializePassport(passport)
 
 
@@ -33,7 +38,8 @@ app.use(flash())
 app.use(session({
   secret: 'secret',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: { maxAge: 24 * 60 * 60 * 1000 }
 }))
 app.use(passport.initialize())
 app.use(passport.session())
@@ -103,18 +109,18 @@ app.post('/signup', ensureNotAuthenticated, async (req, res) => {
   // Redirect the user to the login page
 }});
 
-app.get('/logout', (req, res) => {
-  console.log('logout');
-  req.session.destroy(function (err) {
-    if (err) {
-    console.log(err);
-    res.status(500).send(err);
-    } else {
-      res.clearCookie('connect.sid');
-      res.redirect('/');
-    }
-});
-});
+// app.get('/logout', (req, res) => {
+//   console.log('logout');
+//   req.session.destroy(function (err) {
+//     if (err) {
+//     console.log(err);
+//     res.status(500).send(err);
+//     } else {
+//       res.clearCookie('connect.sid');
+//       res.redirect('/');
+//     }
+// });
+// });
 
 // Define a route for the dashboard page
 app.get('/dashboard', ensureAuthenticated, (req, res) => {
@@ -123,17 +129,133 @@ app.get('/dashboard', ensureAuthenticated, (req, res) => {
 
 // Define a route for the contract page
 app.get('/contracts',ensureAuthenticated, async (req, res) => {
-  const contractRecords = await contractController.getAllContracts(req, res);
+  await contractController.getAllContracts(req, res);
+});
+
+app.get('/contracts/editcontract/:id', ensureAuthenticated, async (req, res) => {
+  const contractRecord = await ContractTable.findById(req.params.id);
+  res.render('dashboard/updateanddelete/editcontract', { contractRecord });
+});
+
+app.post('/contracts/editcontract/:id', ensureAuthenticated, async (req, res) => {
+  try {
+    const updatedContract = await ContractTable.findByIdAndUpdate(req.params.id, req.body, { useFindAndModify: false });
+    console.log("Updated contract : ", updatedContract);
+    res.redirect('/contracts');
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.get('/contracts/deletecontract/:id', ensureAuthenticated, async (req, res) => {
+  try {
+    const deletecontract = await ContractTable.findByIdAndDelete(req.params.id, req.body, { useFindAndModify: false });
+    console.log("work deleted : ", deletecontract);
+    res.redirect('/contracts');
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // Define a route for the employees page
-app.get('/employee', ensureAuthenticated, (req, res) => {
-  res.render( 'dashboard/employee');
+app.get('/employee', ensureAuthenticated, async (req, res) => {
+  await employeeController.getAllEmployees(req, res);
+});
+
+app.get('/employee/editemployee/:id', ensureAuthenticated, async (req, res) => {
+  try {
+      const employeeRecord = await EmployeeTable.findById(req.params.id);
+      res.render('dashboard/updateanddelete/editemployee', { employeeRecord });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Server error' });
+  }
+});
+
+app.post('/employee/editemployee/:id', ensureAuthenticated, async (req, res) => {
+  try {
+    const updatedemployee = await EmployeeTable.findByIdAndUpdate(req.params.id, req.body, { useFindAndModify: false });
+    console.log("Updated employee : ", updatedemployee);
+    res.redirect('/employee');
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.get('/employee/deleteemployee/:id', ensureAuthenticated, async (req, res) => {
+  try {
+    const updatedemployee = await EmployeeTable.findByIdAndDelete(req.params.id, req.body, { useFindAndModify: false });
+    console.log("employee deleted : ", updatedemployee);
+    res.redirect('/employee');
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // Define a route for the stocks page
-app.get('/stocks', ensureAuthenticated, async (req, res) => {
+app.get('/materialinventory', ensureAuthenticated, async (req, res) => {
   const stockRecords = await stockController.getAllStocks(req, res);
+});
+
+app.get('/materialinventory/editmaterialinventory/:id', ensureAuthenticated, async (req, res) => {
+  const materialRecords = await MaterialTable.find();
+  const materialRecord = await StockTable1.findById(req.params.id);
+  res.render('dashboard/updateanddelete/editmaterial', { materialRecord, materials: materialRecords });
+});
+
+app.post('/materialinventory/editmaterialinventory/:id', ensureAuthenticated, async (req, res) => {
+  try {
+    const updatedMaterialInventory = await StockTable1.findByIdAndUpdate(req.params.id, req.body, { useFindAndModify: false });
+    console.log("Updated contract : ", updatedMaterialInventory);
+    res.redirect('/materialinventory');
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.get('/materialinventory/deletematerialinventory/:id', ensureAuthenticated, async (req, res) => {
+  try {
+    const deleteMaterial = await StockTable1.findByIdAndDelete(req.params.id, req.body, { useFindAndModify: false });
+    console.log("work deleted : ", deleteMaterial);
+    res.redirect('/materialinventory');
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.get('/works', ensureAuthenticated, async (req, res) => {
+  const workRecords = await WorkDone.find();
+  res.render('dashboard/workDone', { works: workRecords });
+});
+
+app.get('/works/editworks/:id', ensureAuthenticated, async (req, res) => {
+  try {
+      const workRecord = await WorkDone.findById(req.params.id);
+      res.render('dashboard/updateanddelete/editworkdone', { work: workRecord });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Server error' });
+  }
+});
+
+app.post('/works/editworks/:id', ensureAuthenticated, async (req, res) => {
+  try {
+    const updatedWork = await WorkDone.findByIdAndUpdate(req.params.id, req.body, { useFindAndModify: false });
+    console.log("Updated User : ", updatedWork);
+    res.redirect('/works');
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.get('/works/deleteworks/:id', ensureAuthenticated, async (req, res) => {
+  try {
+    const updatedWork = await WorkDone.findByIdAndDelete(req.params.id, req.body, { useFindAndModify: false });
+    console.log("work deleted : ", updatedWork);
+    res.redirect('/works');
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // Define a route for the stocks page
@@ -143,24 +265,51 @@ app.get('/contract/addContract', ensureAuthenticated, (req, res) => {
 });
 
 // Define a route for the stocks page
-app.get('/stock/addStock', ensureAuthenticated, (req, res) => {
-  res.render('dashboard/add/addstock');
+app.get('/stock/addStock', ensureAuthenticated, async (req, res) => {
+
+  // const materialRecords = await materialController.getAllMaterials(req, res);
+  const materialRecords = await MaterialTable.find();
+  return res.render('dashboard/add/addstock', { materials: materialRecords});
 });
 
 // Define a route for the stocks page
 app.get('/employee/addEmployee', ensureAuthenticated, (req, res) => {
-  console.log(typeof Employee);
-  res.render('dashboard/add/addemployee', { employees: Employee});
+  console.log(typeof EmployeeTable);
+   return res.render('dashboard/add/addemployee', { employees: EmployeeTable});
 });
 
 // Define a route for the stocks page
-app.get('/works/addWorks', ensureAuthenticated, (req, res) => {
-  res.render('dashboard/add/addworks');
+app.get('/works/addWorks', ensureAuthenticated, async (req, res) => {
+  const workRecords = await WorkDone.find();
+  res.render('dashboard/add/addworks', { works: workRecords });
 });
 
+app.post('/works/addWorks', ensureAuthenticated, async (req, res) => {
+  try {
+    // Extract the data from the request body
+    const { itemNumber, buildingComponent, itemName, unit, quantity, unitPrice } = req.body;
+
+    // Create a new contract entry in ContractTable
+    const newWorkRecord = new WorkDone({
+      itemNumber,
+      buildingComponent,
+      itemName,
+      unit,
+      quantity,
+      unitPrice,
+    });
+
+    await newWorkRecord.save();
+    res.redirect('/works');
+  } 
+  catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 // Routes 
 app.use('/api/contracts', contractRoutes);
-app.use('/api/stocks', stockRoutes);
+app.use('/api/materialinventory', stockRoutes);
 app.use('/api/materials', materialRoutes);
 app.use('/api/employees', employeeRoutes);
 

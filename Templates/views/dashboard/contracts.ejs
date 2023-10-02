@@ -6,7 +6,8 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
-    <title>Dashboard Template · Bootstrap v5.0</title>
+    <title>Contract</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sticky-footer/">
@@ -135,7 +136,82 @@
         </nav> -->
         <%- include('./partials/nav.ejs', { currentPageName: 'contract' }) %>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
-          
+          <form action="http://localhost:3000/api/contracts" method="post" class="insert-form">
+
+            <hr>
+            <h1 class="text-center">Dynamically add input</h1>
+
+            <hr>
+
+            <div class="input-field">
+
+                <div class="table-responsive">
+
+                    <table class="table table-bordered text-center" id="table_field">
+
+                        <tr>
+
+                            
+
+                            <th>item no.</th>
+
+                            <th>Building Component</th>
+
+                            <th>Item Name</th>
+
+                            <th>Unit</th>
+
+                            <th>Quantity</th>
+                            
+                            <th>Unit Price</th>
+
+                            <th>Remove</th>
+
+                            <!-- <th>Action</th> -->
+                        </tr>
+
+                        <tr>
+
+                            <td><input type="number" class="form-control" name="itemNumber" required></td>
+
+                            <td><input type="text" class="form-control" name="buildingComponent" required></td>
+
+                            <td><input type="text" class="form-control" name="itemName" required></td>
+
+                            <td><input type="text" class="form-control" name="unit" required></td>
+
+                            <td><input type="number" class="form-control" name="quantity" required></td>
+
+                            <td><input type="number" class="form-control" name="unitPrice" required></td>
+
+                            <td><input class="btn btn-danger" name="remove" id="remove" value="Remove" type="button"></td>
+
+                        </tr>
+
+                    </table>
+
+                    <div class="row">
+
+                        <div class="col-12 text-right">
+
+                            <input type="button" name="add" id="add" value="Add" class="btn btn-success">
+
+                        </div>
+
+                        <div class="col-12 m-3">
+
+                            <input type="submit" name="save" id="save" value="Save" class="btn btn-primary btn-block">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+
 
           <div class="my-4 w-100" id="myChart" width="900" height="380"></div>
 
@@ -151,6 +227,7 @@
                     <th>Unit</th>
                     <th>Quantity</th>
                     <th>Unit Price</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -162,6 +239,7 @@
                       <td><%= contract.unit %></td>
                       <td><%= contract.quantity %></td>
                       <td><%= contract.unitPrice %></td>
+                      <td><a href="contracts/editcontract/<%= contract._id%>" class="btn btn-primary">Edit</a>  <a href="contracts/deletecontract/<%= contract._id%>" class="btn btn-danger">Delete</a></td>
                     </tr>
                   <% }) %>
                 </tbody>

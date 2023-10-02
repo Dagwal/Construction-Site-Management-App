@@ -60,87 +60,12 @@
             <%- include('../partials/header.ejs') %>
             <div class="container-fluid">
             <div class="row">
-                <!-- <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                    <div class="position-sticky pt-3">
-                      <ul class="nav flex-column">
-                        <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="/dashboard">
-                            <span data-feather="home"></span>
-                            Dashboard
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="/contracts">
-                            <span data-feather="file"></span>
-                            Contracts
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="/stocks">
-                            <span data-feather="shopping-cart"></span>
-                            Stocks
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="/employee">
-                            <span data-feather="users"></span>
-                            Employee
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">
-                            <span data-feather="bar-chart-2"></span>
-                            Reports
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">
-                            <span data-feather="layers"></span>
-                            Profile
-                          </a>
-                        </li>
-                      </ul>
-          
-                      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Add</span>
-                        <a class="link-secondary" href="#" aria-label="Add a new report">
-                          <span data-feather="plus-circle"></span>
-                        </a>
-                      </h6>
-                      <ul class="nav flex-column mb-2">
-                        <li class="nav-item">
-                          <a class="nav-link" href="/contract/addContract">
-                            <span data-feather="file-text"></span>
-                            Add Contract
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link active" href="/stock/addStock">
-                            <span data-feather="file-text"></span>
-                            Add Stocks
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="/employee/addEmployee">
-                            <span data-feather="file-text"></span>
-                            Add Employee
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="/works/addworks">
-                            <span data-feather="file-text"></span>
-                            Record Works
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </nav> -->
                   <%- include('../partials/nav.ejs', { currentPageName: 'add-stock' }) %>    
                   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
                     <div class="container ">
-                    <form action="http://localhost:3000/api/stocks" method="post" class="insert-form ">
+                    <form action="http://localhost:3000/api/materialinventory" method="post" class="insert-form ">
                         <hr>
-                        <h1 class="text-center">Dynamically add input</h1>
+                        <h1 class="text-center">Add Material Inventory</h1>
             
                         <hr>
             
@@ -160,7 +85,11 @@
         
                                         <th>Material Type/Size</th>
         
+                                        <th>Mesuring Unit</th>
+
                                         <th>Quantity</th>
+
+                                        <th>Price</th>
         
                                         <th>Remove</th>
             
@@ -170,13 +99,43 @@
             
                                         
             
-                                        <td><input type="text" class="form-control" name="itemNumber" required></td>
+                                        <td class="itemnobox"><select class="form-control" name="itemNumber" required>
+                                          <% if(typeof materials !== 'undefined') { %>
+                                            <% materials.filter(material => material.materialName !== "").forEach(function(material) { %>
+                                              <option class="form-control" value="<%= material.itemNumber %>"><%= material.itemNumber %></option>
+                                            <% }); %>
+                                         <% } %>
+                                        </select></td>
             
-                                        <td><input type="text" class="form-control" name="materialName" required></td>
+                                        <td><select class="form-control" name="materialName" required>
+                                          <% if(typeof materials !== 'undefined') { %>
+                                            <% materials.filter(material => material.materialName !== "").forEach(function(material) { %>
+                                              <option class="form-control" value="<%= material.materialName %>"><%= material.materialName %></option>
+                                            <% }); %>
+                                         <% } %>
+                                          
+                                        </select></td>
         
-                                        <td><input type="text" class="form-control" name="materialTypeSize" required></td>
+                                        <td><select class="form-control" name="materialTypeSize" required>
+                                          <% if(typeof materials !== 'undefined') { %>
+                                            <% materials.filter(material => material.materialName !== "").forEach(function(material) { %>
+                                              <option class="form-control" value="<%= material.materialTypeSize %>"><%= material.materialTypeSize %></option>
+                                            <% }); %>
+                                         <% } %>
+                                          
+                                        </select></td>
+
+                                        <td><select class="form-control" name="mesuringUnit" required>
+                                          <% if(typeof materials !== 'undefined') { %>
+                                            <% materials.filter(material => material.materialName !== "").forEach(function(material) { %>
+                                              <option class="form-control" value="<%= material.mesuringUnit%>"><%= material.mesuringUnit %></option>
+                                            <% }); %>
+                                         <% } %>
+                                          
+                                        </select></td>
         
                                         <td><input type="number" class="form-control" name="quantity" required></td>
+                                        <td><input type="number" class="form-control" name="price" step="0.01" required></td>
         
                                         <td><input class="btn btn-danger" name="remove" id="remove" value="Remove" type="button"></td>
             
@@ -205,12 +164,86 @@
                         </div>
             
                     </form>
-            
+                    <br>
+                    <% if (typeof message !== 'undefined') { %>
+                      <div  role="alert">
+                        <div class="alert alert-warning d-flex align-items-center" role="alert">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                          </svg>
+                          <div>
+                            <%= message %>
+                          </div>
+                        </div>
+                      </div>
+                    <% } %>
+                    <form action="http://localhost:3000/api/materials" method="post" class="insert-form ">
+                      <hr>
+                      <h1 class="text-center">Add Materials Size or Type</h1>
+          
+                      <hr>
+          
+                      <div class="input-field">
+          
+                          <div class="table-responsive">
+          
+                              <table class="table table-bordered text-center addmaterial" id="table_field">
+          
+                                  <tr>
+                                      <th>Item No.</th>
+                                      <td class="itemnobox"><input type="text" class="form-control" name="itemNumber" ></td>
+                                      <td><input type="submit" name="save" id="save" value="Save" class="btn btn-primary btn-block save"></td>
+                                  </tr>
+                                  <tr>
+                                      <th>Material Name</th>
+                                      <td><input type="text" class="form-control" name="materialName" ></td>
+                                      <td><input type="submit" name="save" id="save" value="Save" class="btn btn-primary btn-block save"></td>
+                                  </tr>
+                                  <tr>
+                                      <th>Material Type/Size</th>
+                                      <td><input type="text" class="form-control" name="materialTypeSize" ></td>
+                                      <td><input type="submit" name="save" id="save" value="Save" class="btn btn-primary btn-block save"></td>
+                                  </tr>
+                                  <tr>
+                                      <th>mesuring Unit</th>
+                                      <td><input type="text" class="form-control" name="mesuringUnit" ></td>
+                                      <td><input type="submit" name="save" id="save" value="Save" class="btn btn-primary btn-block save"></td>
+                                  </tr>
+                                  <tr>
+                                      <th>Remove</th>
+                                      <td><input class="btn btn-danger" name="remove" id="remove" value="Remove" type="button"></td>
+                                  </tr>
+
+                              </table>
+          
+                              <div class="row">
+          
+                                  <div class="col-12 text-right">
+          
+                                      <input type="button" name="add" id="add" value="Add" class="btn btn-success">
+          
+                                  </div>
+          
+                                  <div class="col-12 m-3">
+          
+                                    
+          
+                                  </div>
+          
+                              </div>
+          
+                          </div>
+          
+                      </div>
+          
+                  </form>
                 </div>
                     </main>
                 
             </div>
             </div>
+            <br><br>
+
             <%- include('../partials/footer.ejs') %>
             <!-- <footer class="footer mt-auto py-3 bg-light">
             <div class="footer-content">

@@ -1,20 +1,26 @@
 const mongoose = require('mongoose');
+const material = require('./Material');
 
 // Schema for Stock Table (Table 1)
 const stockTable1Schema = new mongoose.Schema({
-  itemNumber: String, // Primary Key
-  materialName: String, // Foreign Key referencing Material Name Table
-  materialTypeSize: String, // Foreign Key referencing Material Type/Size Table
+  itemNumber: Number, // Foreign Key referencing Material Table
+  materialName: String,
+  materialTypeSize: String,
   quantity: Number,
+  unitMesurment: String,
+  price: Number,
   date: { type: Date, default: Date.now }, // Automatically generated
 });
 
 // Schema for Table 2 (Aggregated Stock)
 const stockTable2Schema = new mongoose.Schema({
-  materialName: String, // Foreign Key referencing Material Name Table
-  materialTypeSize: String, // Foreign Key referencing Material Type/Size Table
-  totalQuantity: Number, // => Automatically Generated from Table1 stock item !!
-  lastUpdatedDate: { type: Date, default: Date.now }, // Automatically generated
+  itemNumber: Number, // Foreign Key referencing Material Table
+  materialName: String,
+  materialTypeSize: String,
+  quantity: Number,
+  unitMesurment: String,
+  price: Number,
+  date: { type: Date, default: Date.now }
 });
 
 const StockTable1 = mongoose.model('StockTable1', stockTable1Schema);

@@ -5,7 +5,7 @@ const { EmployeeTable } = require('../models/Employee');
 exports.getAllEmployees = async (req, res) => {
     try {
         const employeesRecord = await EmployeeTable.find();
-        res.json(employeesRecord)
+        return res.render('dashboard/employee', { employees: employeesRecord});
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Server error" })
@@ -33,12 +33,12 @@ exports.createEmployee = async (req, res) => {
         const { name, proficiency, salary, Attendance, date } = req.body;
         // Create a new Employee in Employeetable
         const newEmployee = await EmployeeTable.create({
-            name, proficiency, salary, Attendance, date
+            name,  proficiency, salary, Attendance, date
         });
-        res.json(newEmployee)
+        res.redirect('/employee')
     } catch (err) {
         console.error(err);
-        res.json(500).json({ error: "Server error" });
+        res.render('dashboard/add/addemployee', { error: "Server error" });
     }
 };
 
