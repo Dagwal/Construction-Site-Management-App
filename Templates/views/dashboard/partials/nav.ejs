@@ -20,6 +20,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link <%= currentPageName === 'Used Materials' ? 'active' : '' %>" href="/materialinventory/usedmaterials">
+                <span data-feather="shopping-cart"></span>
+                Used Materials
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link <%= currentPageName === 'employee' ? 'active' : '' %>" href="/employee">
                     <span data-feather="users"></span>
                     Employee
@@ -31,44 +37,47 @@
                     Works Done
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link <%= currentPageName === 'reports' ? 'active' : '' %>" href="#">
                     <span data-feather="bar-chart-2"></span>
                     Reports
                 </a>
-            </li>
+            </li> -->
             
         </ul>
-
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        <span>Add</span>
-        <a class="link-secondary" href="#" aria-label="Add a new report">
-          <span data-feather="plus-circle"></span>
-        </a>
+        <br>
+        <h6 class=" align-items-center px-3 mt-4 mb-1 text-muted">
+        <span data-feather="bar-chart-2"></span>  Reports
         </h6>
         <ul class="nav flex-column mb-2">
             <li class="nav-item">
-                <a class="nav-link <%= currentPageName === 'add-contract' ? 'active' : '' %>" href="/contract/addContract">
+                <a class="nav-link <%= currentPageName === 'Contract Report' ? 'active' : '' %>" href="/contract/addContract">
                     <span data-feather="file-text"></span>
-                    Add Contract
+                    Contract Report
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <%= currentPageName === 'add-stock' ? 'active' : '' %>" href="/stock/addStock">
+                <a class="nav-link <%= currentPageName === 'Materials Report' ? 'active' : '' %>" href="/stock/addStock">
                     <span data-feather="file-text"></span>
-                    Add Materials
+                    Materials Report
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <%= currentPageName === 'add-employee' ? 'active' : '' %>" href="/employee/addEmployee">
+                <a class="nav-link <%= currentPageName === 'Total Used Materials' ? 'active' : '' %>" href="/materialinventory/usedmaterials/totalusedmaterials">
                     <span data-feather="file-text"></span>
-                    Add Employee
+                    Total Used Materials
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <%= currentPageName === 'record-works' ? 'active' : '' %>" href="/works/addWorks">
+                <a class="nav-link <%= currentPageName === 'Employee Report' ? 'active' : '' %>" href="/employee/addEmployee">
                     <span data-feather="file-text"></span>
-                    Record Works
+                    Employee Report
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= currentPageName === 'Work Report' ? 'active' : '' %>" href="/works/addWorks">
+                    <span data-feather="file-text"></span>
+                    Work Report
                 </a>
             </li>
         </ul>

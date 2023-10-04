@@ -60,12 +60,12 @@
     <div class="container-fluid">
       <div class="row">
         
-        <%- include('./partials/nav.ejs', { currentPageName: 'Material Inventory' }) %>
+        <%- include('./partials/nav.ejs', { currentPageName: 'Used Materials' }) %>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
           
-          <form action="http://localhost:3000/api/materialinventory" method="post" class="insert-form ">
+          <form action="/materialinventory/usedmaterials" method="post" class="insert-form ">
             <hr>
-            <h1 class="text-center">Add Material Inventory</h1>
+            <h1 class="text-center">Add Used Material</h1>
 
             <hr>
 
@@ -167,72 +167,11 @@
 
         </form>
         <br>
-        <form action="http://localhost:3000/api/materials" method="post" class="insert-form ">
-          <hr>
-          <h1 class="text-center">Add Materials Size or Type</h1>
-
-          <hr>
-
-          <div class="input-field">
-
-              <div class="table-responsive">
-
-                  <table class="table table-bordered text-center addmaterial" id="table_field">
-
-                      <tr>
-                          <th>Item No.</th>
-                          <td class="itemnobox"><input type="text" class="form-control" name="itemNumber" ></td>
-                          <td><input type="submit" name="save" id="save" value="Save" class="btn btn-primary btn-block save"></td>
-                      </tr>
-                      <tr>
-                          <th>Material Name</th>
-                          <td><input type="text" class="form-control" name="materialName" ></td>
-                          <td><input type="submit" name="save" id="save" value="Save" class="btn btn-primary btn-block save"></td>
-                      </tr>
-                      <tr>
-                          <th>Material Type/Size</th>
-                          <td><input type="text" class="form-control" name="materialTypeSize" ></td>
-                          <td><input type="submit" name="save" id="save" value="Save" class="btn btn-primary btn-block save"></td>
-                      </tr>
-                      <tr>
-                          <th>mesuring Unit</th>
-                          <td><input type="text" class="form-control" name="mesuringUnit" ></td>
-                          <td><input type="submit" name="save" id="save" value="Save" class="btn btn-primary btn-block save"></td>
-                      </tr>
-                      <tr>
-                          <th>Remove</th>
-                          <td><input class="btn btn-danger" name="remove" id="remove" value="Remove" type="button"></td>
-                      </tr>
-
-                  </table>
-
-                  <div class="row">
-
-                      <div class="col-12 text-right">
-
-                          <input type="button" name="add" id="add" value="Add" class="btn btn-success">
-
-                      </div>
-
-                      <div class="col-12 m-3">
-
-                        
-
-                      </div>
-
-                  </div>
-
-              </div>
-
-          </div>
-
-      </form>
-      <br>
           <div class="my-4 w-100" id="myChart" width="900" height="380"></div>
 
           <h2>Materials</h2>
           <div class="table-responsive">
-            <% if (stockTable1Records.length > 0 ) { %>
+            <% if (usedMaterialRecords.length > 0 ) { %>
               <table  id="example" class="table table-striped" style="width:100%">
                 <thead>
                   <tr>
@@ -248,7 +187,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% stockTable1Records.forEach(stock => { %>
+                  <% usedMaterialRecords.forEach(stock => { %>
                     <tr>
                       <td><%= stock.itemNumber %></td>
                       <td><%= stock.materialName %></td>
@@ -258,7 +197,7 @@
                       <td><%= stock.price %></td>
                       <td><%= (stock.price * stock.quantity).toFixed(2)   %></td>
                       <td><%= stock.date.toLocaleString({timeZone: 'Africa/Addis_Ababa'}) %></td>
-                      <td><a href="/materialinventory/editmaterialinventory/<%= stock._id%>" class="btn btn-primary">Edit</a>  <a href="/materialinventory/deletematerialinventory/<%= stock._id%>" class="btn btn-danger">Delete</a></td>
+                      <td><a href="/materialinventory/usedmaterials/editusedmaterial/<%= stock._id%>" class="btn btn-primary">Edit</a>  <a href="/materialinventory/usedmaterials/deleteusedmaterial/<%= stock._id%>" class="btn btn-danger">Delete</a></td>
                     </tr>
                   <% }) %>
                 </tbody>
@@ -272,60 +211,7 @@
           <div class="my-4 w-100" id="myChart" width="900" height="380"></div>
 
 <br>
-            <%
-            const aggregatedQuantitiesByMaterialAndType = {};
-            for (const stockTable1Record of stockTable1Records) {
-              const materialName = stockTable1Record.materialName;
-              const materialTypeSize = stockTable1Record.materialTypeSize;
-              const quantity = stockTable1Record.quantity;
-              const unitMesurment = stockTable1Record.unitMesurment;
-              const price = stockTable1Record.price;
-              const totalPrice = quantity * price;
-
-              if (!aggregatedQuantitiesByMaterialAndType[materialName]) {
-                aggregatedQuantitiesByMaterialAndType[materialName] = {};
-              }
-
-              if (!aggregatedQuantitiesByMaterialAndType[materialName][materialTypeSize]) {
-                aggregatedQuantitiesByMaterialAndType[materialName][materialTypeSize] = {
-                  quantity: 0,
-                  totalPrice: 0,
-                  unitMesurment,
-                  price,
-                };
-              }
-
-              aggregatedQuantitiesByMaterialAndType[materialName][materialTypeSize].quantity += quantity;
-              aggregatedQuantitiesByMaterialAndType[materialName][materialTypeSize].totalPrice += totalPrice;
-            }
-            %>
-            <h2>Material Inventory Summary</h2>
-            <table id="example" class="table table-striped" style="width:100%">
-              <thead>
-                <tr>
-                  <th>Material Name</th>
-                  <th>Material Type/Size</th>
-                  <th>Unit of Measurement</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                  <th>Total Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% for (const materialName in aggregatedQuantitiesByMaterialAndType) { %>
-                  <% for (const materialTypeSize in aggregatedQuantitiesByMaterialAndType[materialName]) { %>
-                    <tr>
-                      <td><%= materialName %></td>
-                      <td><%= materialTypeSize %></td>
-                      <td><%= aggregatedQuantitiesByMaterialAndType[materialName][materialTypeSize].unitMesurment %></td>
-                      <td><%= aggregatedQuantitiesByMaterialAndType[materialName][materialTypeSize].quantity %></td>
-                      <td><%= aggregatedQuantitiesByMaterialAndType[materialName][materialTypeSize].price %></td>
-                      <td><%= aggregatedQuantitiesByMaterialAndType[materialName][materialTypeSize].totalPrice %></td>
-                    </tr>
-                  <% } %>
-                <% } %>
-              </tbody>
-            </table>
+            
           </div>
         </main>
       </div>

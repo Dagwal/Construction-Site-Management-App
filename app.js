@@ -18,14 +18,15 @@ const employeeController = require('./controllers/employeeController');
 const users = require('./models/user');
 const materialController = require('./controllers/materialController');
 const { EmployeeTable } = require('./models/Employee');
-const { ContractTable } = require('./models/Contract');
+const { ContractTable, ContractArchiveTable } = require('./models/Contract');
 const path = require('path')
 const app = express();
 
 const initializePassport = require('./passport-config');
 const { MaterialTable } = require('./models/Material');
-const WorkDone = require('./models/WorkDone');
+const { WorkDone, WorkDoneArchiveTable } = require('./models/WorkDone');
 const { StockTable1, StockTable2 } = require('./models/Stock');
+const {UsedMaterialTable, UsedMaterialArchiveTable} = require('./models/usedmaterial');
 
 initializePassport(passport)
 
@@ -123,8 +124,11 @@ app.post('/signup', ensureNotAuthenticated, async (req, res) => {
 // });
 
 // Define a route for the dashboard page
-app.get('/dashboard', ensureAuthenticated, (req, res) => {
-  res.render('dashboard/dashboard');
+app.get('/dashboard', ensureAuthenticated, async (req, res) => {
+
+    const workArchiveRecords = await WorkDoneArchiveTable.find();
+    const ContractArchive = await ContractArchiveTable.find();
+    res.render('dashboard/dashboard', { workArchiveRecords, ContractArchive });
 });
 
 // Define a route for the contract page
@@ -197,6 +201,63 @@ app.get('/materialinventory', ensureAuthenticated, async (req, res) => {
   const stockRecords = await stockController.getAllStocks(req, res);
 });
 
+app.get('/materialinventory/usedmaterials', ensureAuthenticated, async (req, res) => {
+  const materialRecords = await MaterialTable.find();
+  const usedMaterialRecords = await UsedMaterialTable.find();
+  return res.render('dashboard/usedmaterials', { materials: materialRecords, usedMaterialRecords});
+})
+
+app.post('/materialinventory/usedmaterials', ensureAuthenticated, async (req, res) => {
+  try {
+    // Extract data from the request body
+    const {itemNumber, materialName, materialTypeSize, quantity, unitMesurment, price} = req.body
+
+    // Create a new stock entry in Table 1
+    const newUsedMaterial = await UsedMaterialTable({
+        itemNumber,
+        materialName,
+        materialTypeSize,
+        quantity,
+        unitMesurment,
+        price
+    });
+
+    await newUsedMaterial.save();
+    const newUsedMaterialArchive = new UsedMaterialArchiveTable({
+        itemNumber: newUsedMaterial.itemNumber,
+        materialName: newUsedMaterial.materialName,
+        materialTypeSize: newUsedMaterial.materialTypeSize,
+        quantity: newUsedMaterial.quantity,
+        unitMesurment: newUsedMaterial.unitMesurment,
+        price: newUsedMaterial.price,
+      });
+      newUsedMaterialArchive.save();
+      // Update the quantity of the existing contract archive schema object, or create a new one if it does not exist.
+      const usedMaterialArchive = await StockTable2.findOne({materialName: newUsedMaterialArchive.materialName, 
+        materialTypeSize: newUsedMaterialArchive.materialTypeSize});
+        console.log("usedMaterialArchive", usedMaterialArchive.quantity);
+        console.log("newUsedMaterialArchive", newUsedMaterialArchive.quantity);
+      if (usedMaterialArchive.quantity > newUsedMaterialArchive.quantity) {
+        console.log("working")
+        await StockTable2.findOneAndUpdate(
+          { itemNumber: newUsedMaterialArchive.itemNumber, materialName: newUsedMaterialArchive.materialName, materialTypeSize: newUsedMaterialArchive.materialTypeSize,
+            unitMesurment: newUsedMaterialArchive.unitMesurment, price: newUsedMaterialArchive.price},
+          { $inc: { quantity: -newUsedMaterialArchive.quantity } },
+          { upsert: true, new: true },
+        );
+        res.redirect('/materialinventory/usedmaterials');
+          } else {
+            // The contract quantity is less than zero.
+            const materialRecords = await MaterialTable.find();
+            const usedMaterialRecords = await UsedMaterialTable.find();
+            res.render('dashboard/usedmaterials', { message: 'Material quantity is less than zero',  materials: materialRecords, usedMaterialRecords });
+    } 
+} catch (error) {
+    console.error(error);
+    res.status(500).json({error: "Server error"})
+}
+})
+
 app.get('/materialinventory/editmaterialinventory/:id', ensureAuthenticated, async (req, res) => {
   const materialRecords = await MaterialTable.find();
   const materialRecord = await StockTable1.findById(req.params.id);
@@ -223,9 +284,36 @@ app.get('/materialinventory/deletematerialinventory/:id', ensureAuthenticated, a
   }
 });
 
+app.get('/materialinventory/usedmaterials/editusedmaterial/:id', ensureAuthenticated, async (req, res) => {
+  const materialRecords = await MaterialTable.find();
+  const usedMaterialRecords = await UsedMaterialTable.findById(req.params.id);
+  res.render('dashboard/updateanddelete/editusedmaterial', { usedMaterialRecords, materials: materialRecords });
+});
+
+app.post('/materialinventory/usedmaterials/editusedmaterial/:id', ensureAuthenticated, async (req, res) => {
+  try {
+    const updatedUsedMaterial = await UsedMaterialTable.findByIdAndUpdate(req.params.id, req.body, { useFindAndModify: false });
+    console.log("Updated used material : ", updatedUsedMaterial);
+    res.redirect('/materialinventory/usedmaterials');
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.get('/materialinventory/usedmaterials/deleteusedmaterial/:id', ensureAuthenticated, async (req, res) => {
+  try {
+    const deleteUsedMaterial = await UsedMaterialTable.findByIdAndDelete(req.params.id, req.body, { useFindAndModify: false });
+    console.log("work deleted : ", deleteUsedMaterial);
+    res.redirect('/materialinventory/usedmaterials');
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 app.get('/works', ensureAuthenticated, async (req, res) => {
   const workRecords = await WorkDone.find();
-  res.render('dashboard/workDone', { works: workRecords });
+  const ContractArchive = await ContractArchiveTable.find();
+  res.render('dashboard/workDone', { works: workRecords, ContractArchive});
 });
 
 app.get('/works/editworks/:id', ensureAuthenticated, async (req, res) => {
@@ -259,8 +347,10 @@ app.get('/works/deleteworks/:id', ensureAuthenticated, async (req, res) => {
 });
 
 // Define a route for the stocks page
-app.get('/contract/addContract', ensureAuthenticated, (req, res) => {
-  res.render('dashboard/add/addcontract');
+app.get('/contract/addContract', ensureAuthenticated, async (req, res) => {
+
+  const comulitiveContract = await ContractArchiveTable.find();
+  res.render('dashboard/add/addcontract', {comulitiveContract});
   
 });
 
@@ -268,20 +358,28 @@ app.get('/contract/addContract', ensureAuthenticated, (req, res) => {
 app.get('/stock/addStock', ensureAuthenticated, async (req, res) => {
 
   // const materialRecords = await materialController.getAllMaterials(req, res);
-  const materialRecords = await MaterialTable.find();
-  return res.render('dashboard/add/addstock', { materials: materialRecords});
+  const materialRecords = await StockTable2.find();
+  return res.render('dashboard/add/addstock', { stockTable1Records: materialRecords});
+});
+
+app.get('/materialinventory/usedmaterials/totalusedmaterials', ensureAuthenticated, async (req, res) => {
+
+  // const materialRecords = await materialController.getAllMaterials(req, res);
+  const materialRecords = await UsedMaterialTable.find();
+  return res.render('dashboard/add/totalusedmaterials', { stockTable1Records: materialRecords});
 });
 
 // Define a route for the stocks page
-app.get('/employee/addEmployee', ensureAuthenticated, (req, res) => {
+app.get('/employee/addEmployee', ensureAuthenticated, async (req, res) => {
   console.log(typeof EmployeeTable);
-   return res.render('dashboard/add/addemployee', { employees: EmployeeTable});
+  const employees = await EmployeeTable.find();
+   return res.render('dashboard/add/addemployee', { employees });
 });
 
 // Define a route for the stocks page
 app.get('/works/addWorks', ensureAuthenticated, async (req, res) => {
-  const workRecords = await WorkDone.find();
-  res.render('dashboard/add/addworks', { works: workRecords });
+  const cumulativework = await WorkDone.find();
+  res.render('dashboard/add/addworks', {cumulativework});
 });
 
 app.post('/works/addWorks', ensureAuthenticated, async (req, res) => {
@@ -300,9 +398,34 @@ app.post('/works/addWorks', ensureAuthenticated, async (req, res) => {
     });
 
     await newWorkRecord.save();
-    res.redirect('/works');
+
+    const newWorkArchive = new WorkDoneArchiveTable({
+      itemNumber: newWorkRecord.itemNumber,
+      buildingComponent: newWorkRecord.buildingComponent,
+      itemName: newWorkRecord.itemName,
+      unit: newWorkRecord.unit,
+      quantity: newWorkRecord.quantity,
+      unitPrice: newWorkRecord.unitPrice,
+    });
+        newWorkArchive.save();
+    // Update the quantity of the existing contract archive schema object, or create a new one if it does not exist.
+    const ContractArchive = await ContractArchiveTable.findOne({buildingComponent: newWorkArchive.buildingComponent, 
+      itemName: newWorkArchive.itemName});
+    if (ContractArchive.quantity > newWorkArchive.quantity) {
+      await ContractArchiveTable.findOneAndUpdate(
+        { itemNumber: newWorkArchive.itemNumber, buildingComponent: newWorkArchive.buildingComponent, itemName: newWorkArchive.itemName,
+          unit: newWorkArchive.unit, unitPrice: newWorkArchive.unitPrice},
+        { $inc: { quantity: -newWorkArchive.quantity } },
+        { upsert: true, new: false },
+      );
+      res.redirect('/works');
+        } else {
+          // The contract quantity is less than zero.
+          const workRecords = await WorkDone.find();
+          const ContractArchive = await ContractArchiveTable.find();
+          res.render('dashboard/workDone', { message: 'Contract quantity is less than zero', works: workRecords, ContractArchive });
   } 
-  catch (error) {
+}catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Server error' });
   }

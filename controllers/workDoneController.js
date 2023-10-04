@@ -1,13 +1,13 @@
-const WorkDone = require('../models/WorkDone'); 
-
+const { trusted } = require('mongoose');
+const { WorkDone, WorkDoneArchiveTable } = require('../models/WorkDone'); 
 // Controller function to create a new work record
 exports.createWorkRecord = async (req, res) => {
   try {
-    // Extract data from the request body
-    const { itemNumber, buildingComponent, itemName, unit, quantity, unitPrice} = req.body;
+    // Extract the data from the request body
+    const { itemNumber, buildingComponent, itemName, unit, quantity, unitPrice } = req.body;
 
-    // Create a new work record
-    const newWorkRecord = new WorkDone({
+    // Create a new contract entry in ContractTable
+    const newWorkDone = await WorkDone.create({
       itemNumber,
       buildingComponent,
       itemName,
@@ -16,8 +16,23 @@ exports.createWorkRecord = async (req, res) => {
       unitPrice,
     });
 
-    // Save the work record to the database
-    const savedWorkRecord = await newWorkRecord.save();
+    const newWorkArchive = new WorkDoneArchiveTable({
+      itemNumber: newWorkDone.itemNumber,
+      buildingComponent: newWorkDone.buildingComponent,
+      itemName: newWorkDone.itemName,
+      unit: newWorkDone.unit,
+      quantity: newWorkDone.quantity,
+      unitPrice: newWorkDone.unitPrice,
+    });
+
+    // Update the quantity of the existing contract archive schema object, or create a new one if it does not exist.
+    await WorkDoneArchiveTable.findOneAndUpdate(
+      { itemNumber: newContractArchive.itemNumber, buildingComponent: newContractArchive.buildingComponent, itemName: newContractArchive.itemName,
+        unit: newContractArchive.unit, unitPrice: newContractArchive.unitPrice},
+      { $inc: { quantity: newContractArchive.quantity } },
+      { upsert: true, new: true },
+    );
+
 
     res.redirect('/works/addWorks'); // Respond with the saved record
   } catch (error) {

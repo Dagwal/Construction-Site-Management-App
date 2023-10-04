@@ -10,4 +10,9 @@ const workDoneSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('WorkDone', workDoneSchema);
+const workDoneArchiveSchema = workDoneSchema.clone();
+
+const WorkDone = mongoose.model('WorkDone', workDoneSchema);
+const WorkDoneArchiveTable = mongoose.model('WorkDoneArchive', workDoneArchiveSchema);
+
+module.exports = { WorkDone, WorkDoneArchiveTable };

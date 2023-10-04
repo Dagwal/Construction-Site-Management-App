@@ -23,6 +23,7 @@ const stockTable2Schema = new mongoose.Schema({
   date: { type: Date, default: Date.now }
 });
 
+
 const StockTable1 = mongoose.model('StockTable1', stockTable1Schema);
 const StockTable2 = mongoose.model('StockTable2', stockTable2Schema);
 
