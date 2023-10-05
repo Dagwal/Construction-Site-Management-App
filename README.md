@@ -31,7 +31,7 @@ The NodeJS Construction Site Managing App is a web-based application built with 
 
 ## Installation
 
-To run the Django Inventory App on your local machine, follow these steps:
+To run the Construction Site App on your local machine, follow these steps:
 
 1. Clone the repository:
 
@@ -93,8 +93,3 @@ Contributions to the NodeJS Construction-Site-Management-App are welcome! If you
 5. Submit a pull request detailing your changes.
 
 ---
-
-
-## License
-
-The Django Inventory App is open source and available under the [MIT License](LICENSE).
