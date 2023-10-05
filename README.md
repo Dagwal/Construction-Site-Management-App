@@ -4,7 +4,7 @@
 
 
 
-> A web-based inventory management application developed using Django.
+> A web-based Construction site management application.
 
 ---
 
