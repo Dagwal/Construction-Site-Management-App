@@ -55,7 +55,7 @@ To run the Construction Site App on your local machine, follow these steps:
 4. Run the development server:
 
    ```shell
-   nodemone app
+   nodemon app
    ```
 
 5. Access the application in your web browser at `http://localhost:3000`.
