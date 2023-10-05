@@ -1,0 +1,91 @@
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link <%= currentPageName === 'dashboard' ? 'active' : '' %>" aria-current="page" href="/dashboard">
+                    <span data-feather="home"></span>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= currentPageName === 'contract' ? 'active' : '' %>" href="/contracts">
+                    <span data-feather="file"></span>
+                    Contracts
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= currentPageName === 'Material Inventory' ? 'active' : '' %>" href="/materialinventory">
+                    <span data-feather="shopping-cart"></span>
+                    Material Inventory
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= currentPageName === 'Used Materials' ? 'active' : '' %>" href="/materialinventory/usedmaterials">
+                <span data-feather="shopping-cart"></span>
+                Used Materials
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= currentPageName === 'employee' ? 'active' : '' %>" href="/employee">
+                    <span data-feather="users"></span>
+                    Employee
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= currentPageName === 'Works Done' ? 'active' : '' %>" href="/works">
+                    <span data-feather="layers"></span>
+                    Works Done
+                </a>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link <%= currentPageName === 'reports' ? 'active' : '' %>" href="#">
+                    <span data-feather="bar-chart-2"></span>
+                    Reports
+                </a>
+            </li> -->
+            
+        </ul>
+        <br>
+        <h6 class=" align-items-center px-3 mt-4 mb-1 text-muted">
+        <span data-feather="bar-chart-2"></span>  Reports
+        </h6>
+        <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <a class="nav-link <%= currentPageName === 'Total Contracts' ? 'active' : '' %>" href="/contract/totalContract">
+                    <span data-feather="file-text"></span>
+                    Total Contracts
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= currentPageName === 'Contract Report' ? 'active' : '' %>" href="/contract/addContract">
+                    <span data-feather="file-text"></span>
+                    Remaining Works
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= currentPageName === 'Materials Report' ? 'active' : '' %>" href="/stock/addStock">
+                    <span data-feather="file-text"></span>
+                    Remaining Materials
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= currentPageName === 'Total Used Materials' ? 'active' : '' %>" href="/materialinventory/usedmaterials/totalusedmaterials">
+                    <span data-feather="file-text"></span>
+                    Total Used Materials
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= currentPageName === 'Employee Report' ? 'active' : '' %>" href="/employee/addEmployee">
+                    <span data-feather="file-text"></span>
+                    Employee Report
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= currentPageName === 'Work Report' ? 'active' : '' %>" href="/works/addWorks">
+                    <span data-feather="file-text"></span>
+                    Completed Works
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

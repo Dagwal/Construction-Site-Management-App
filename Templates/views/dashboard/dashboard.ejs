@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sticky-footer/">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link href="../../public/landing/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .footer {
+        bottom: 0;
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="../../public/dashboard/dashboard.css" rel="stylesheet">
+  </head>
+  <body>
+    
+
+    <%- include('./partials/header.ejs') %>
+    <div class="container-fluid">
+      <div class="row">
+
+        <%- include('./partials/nav.ejs', { currentPageName: 'dashboard' }) %>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
+          
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Dashboard</h1>
+
+          </div>
+         
+          <div class="my-4 w-100" id="myChart" width="900" height="380"></div>
+          <%
+  const aggregatedQuantitiesByBuildingComponentAndItemName = {};
+  workArchiveRecords.forEach(contract => {
+    const buildingComponent = contract.buildingComponent;
+    const itemName = contract.itemName;
+    const quantity = contract.quantity;
+    const unit = contract.unit;
+    const unitPrice = contract.unitPrice;
+    const totalPrice = quantity * unitPrice;
+
+    if (!aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent]) {
+      aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent] = {};
+    }
+
+    if (!aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName]) {
+      aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName] = {
+        quantity: 0,
+        unit,
+        unitPrice,
+        totalPrice: 0,
+      };
+    }
+
+    aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].quantity += quantity;
+    aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].totalPrice += totalPrice;
+  });
+
+  const ContractaggregatedQuantitiesByBuildingComponentAndItemName = {};
+  ContractArchive.forEach(contract => {
+    const buildingComponent = contract.buildingComponent;
+    const itemName = contract.itemName;
+    const quantity = contract.quantity;
+    const unit = contract.unit;
+    const unitPrice = contract.unitPrice;
+    const totalPrice = quantity * unitPrice;
+
+    if (!ContractaggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent]) {
+      ContractaggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent] = {};
+    }
+
+    if (!ContractaggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName]) {
+      ContractaggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName] = {
+        quantity: 0,
+        unit,
+        unitPrice,
+        totalPrice: 0,
+      };
+    }
+
+    ContractaggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].quantity += quantity;
+    ContractaggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].totalPrice += totalPrice;
+  });
+%>
+
+<h2>Work Progress</h2>
+<div class="table-responsive">
+  <table id="example" class="table table-striped" style="width:100%">
+    <thead>
+      <tr>
+        <th>Building Component</th>
+        <th>Item Name</th>
+        <th>Unit</th>
+        <th>Quantity</th>
+        <!-- <th>Unit Price</th>
+        <th>Total Price</th> -->
+        <th>Contract Quantity</th>
+        <th>Progress</th>
+        <th>Progress Bar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const buildingComponent in aggregatedQuantitiesByBuildingComponentAndItemName) { %>
+        <% for (const itemName in aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent]) { %>
+          <tr>
+            <td><%= buildingComponent %></td>
+            <td><%= itemName %></td>
+            <td><%= aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].unit %></td>
+            <td><%= aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].quantity %></td>
+            <!-- <td><%= aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].unitPrice %></td>
+            <td><%= aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].totalPrice %></td> -->
+            <td><%= ContractaggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].quantity %></td>
+            <td>
+              <%
+                const progress = aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].quantity / ContractaggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].quantity * 100;
+              %>
+              <%= progress.toFixed(2) %>%
+            </td>
+            <td>
+              <progress value="<%= progress %>" max="100"></progress>
+            </td>
+          </tr>
+        <% } %>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+        </main>
+      </div>
+    </div>
+    <br>
+    <div id="fixed" class="">
+  </div>
+  <%- include('./partials/footer.ejs') %>
+  <!-- <footer class="col-md-9 ms-sm-auto col-lg-10 px-md-4 footer mt-auto py-3 bg-light aza">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+      </div>
+      <p>&copy; 2023 MD. Construction Site Managment App. All rights reserved.</p>
+    </div>
+  </footer> -->
+    <script src="../../public/landing/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+    <script src="../../public/dashboard/dashboard.js"></script>
+  </body>
+</html>

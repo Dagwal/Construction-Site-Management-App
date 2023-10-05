@@ -23,7 +23,6 @@ const employeeSchema = new mongoose.Schema({
   },
   proficiency: {
     type: String,
-    enum: ['Formal', 'Site Engineer', 'Office Engineer', 'Data Collector', 'Deliver'],
     required: true,
   },
   salary: {
@@ -32,7 +31,6 @@ const employeeSchema = new mongoose.Schema({
   },
   Attendance: {
     type: String,
-    enum: ['Present', 'Absent'],
     required : true,
   },
   date: {

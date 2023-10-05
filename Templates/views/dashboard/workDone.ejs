@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Work Done</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sticky-footer/">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link href="../../public/landing/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="../../public/dashboard/dashboard.css" rel="stylesheet">
+  </head>
+  <body>
+    
+    <!-- <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a>
+      <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="w-100"></div>
+      <div class="navbar-nav">
+        <div class="nav-item text-nowrap">
+          <a class="nav-link px-3" href="#">Sign out</a>
+        </div>
+      </div>
+    </header> -->
+    <%- include('./partials/header.ejs') %>
+    <div class="container-fluid">
+      <div class="row">
+ 
+        <%- include('./partials/nav.ejs', { currentPageName: 'Works Done' }) %>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main">
+          
+          <form action="/works/addWorks" method="post" class="insert-form ">
+            <hr>
+            <h1 class="text-center">Record Daily Works</h1>
+
+            <hr>
+            <% if (typeof message != 'undefined') { %>
+              <div class="alert " role="alert">
+                <div class="alert alert-warning d-flex align-items-center" role="alert">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                  </svg>
+                  <div>
+                    <%= message %>
+                  </div>
+                </div>
+              </div>
+            <% } %>
+            <div class="input-field">
+
+                <div class="table-responsive">
+
+                    <table class="table table-bordered text-center" id="table_field">
+
+                        <tr>
+
+                            
+
+                            <th>item no.</th>
+
+                            <th>buildingComponent</th>
+
+                            <th>itemName</th>
+
+                            <th>unit</th>
+
+                            <th>quantity</th>
+
+                            <th>unitPrice</th>
+
+                            <th>Remove</th>
+
+                        </tr>
+
+                        <tr>
+
+                            
+
+                            <td class="itemnobox"><select class="form-control" name="itemNumber" required>
+                              <% if(typeof ContractArchive !== 'undefined') { %>
+                                <% ContractArchive.forEach(function(work) { %>
+                                  <option class="form-control" value="<%= work.itemNumber %>"><%= work.itemNumber %></option>
+                                <% }); %>
+                             <% } %>
+                            </select></td>
+
+                            <td><select class="form-control" name="buildingComponent" required>
+                              <% if(typeof ContractArchive !== 'undefined') { %>
+                                <% ContractArchive.forEach(function(work) { %>
+                                  <option class="form-control" value="<%= work.buildingComponent %>"><%= work.buildingComponent %></option>
+                                <% }); %>
+                             <% } %>
+                            </select></td>
+
+                            <td><select class="form-control" name="itemName" required>
+                              <% if(typeof ContractArchive !== 'undefined') { %>
+                                <% ContractArchive.forEach(function(work) { %>
+                                  <option class="form-control" value="<%= work.itemName %>"><%= work.itemName %></option>
+                                <% }); %>
+                             <% } %>
+                            </select></td>
+
+                            <td><select class="form-control" name="unit" required>
+                              <% if(typeof ContractArchive !== 'undefined') { %>
+                                <% ContractArchive.forEach(function(work) { %>
+                                  <option class="form-control" value="<%= work.unit %>"><%= work.unit %></option>
+                                <% }); %>
+                             <% } %>
+                            </select></td>
+
+                            <td><input class="form-control" name="quantity" required></td>
+
+                            <td><select class="form-control" name="unitPrice" required>
+                              <% if(typeof ContractArchive !== 'undefined') { %>
+                                <% ContractArchive.forEach(function(work) { %>
+                                  <option class="form-control" value="<%= work.unitPrice %>"><%= work.unitPrice %></option>
+                                <% }); %>
+                             <% } %>
+                            </select></td>
+
+                            <td><input class="btn btn-danger" name="remove" id="remove" value="Remove" type="button"></td>
+
+                        </tr>
+
+                    </table>
+
+                    <div class="row">
+
+                        <div class="col-12 text-right">
+
+                            <input type="button" name="add" id="add" value="Add" class="btn btn-success">
+
+                        </div>
+
+                        <div class="col-12 m-3">
+
+                            <input type="submit" name="save" id="save" value="Save" class="btn btn-primary btn-block">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+          <div class="my-4 w-100" id="myChart" width="900" height="380"></div>
+
+          <h2>Daily Works</h2>
+          <div class="table-responsive">
+            <% if (works.length > 0 ) { %>
+              <table  id="example" class="table table-striped" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Item Number</th>
+                    <th>Building Component</th>
+                    <th>Item Name</th>
+                    <th>Unit</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total Price</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% works.forEach(work => { %>
+                    <tr>
+                      <td><%= work.itemNumber %></td>
+                      <td><%= work.buildingComponent %></td>
+                      <td><%= work.itemName %></td>
+                      <td><%= work.unit %></td>
+                      <td><%= work.quantity %></td>
+                      <td><%= work.unitPrice %></td>
+                      <td><%= work.unitPrice * work.quantity %></td>
+                      <th><%= work.date.toLocaleString({timeZone: 'Africa/Addis_Ababa'}) %></th>
+                      <td><a href="/works/editworks/<%= work._id%>" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="/works/deleteworks/<%= work._id%>" class="btn btn-danger btn-sm">  delete</a></td>
+                    </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            <% } %>
+          </div>
+        </main>
+      </div>
+    </div>
+    <br>
+    <%- include('./partials/footer.ejs') %>
+    <!-- <footer class="col-md-9 ms-sm-auto col-lg-10 px-md-4 footer mt-auto py-3 bg-light">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2023 MD. Construction Site Managment App. All rights reserved.</p>
+      </div>
+    </footer> -->
+    <script src="../../public/landing/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+    <script src="../../public/dashboard/dashboard.js"></script>
+    <script>
+      // Add functionality to add the `active` class to the navigation bar
+      const navLinks = document.querySelectorAll('.nav-link');
+  
+      for (const navLink of navLinks) {
+        navLink.addEventListener('click', (event) => {
+          for (const link of navLinks) {
+            link.classList.remove('active');
+          }
+  
+          event.target.classList.add('active');
+        });
+      }
+    </script>
+    <script>
+      $(document).ready(function() {
+        // Calculate the total salary.
+        var totalSalary = 0;
+        $('#example tbody tr').each(function() {
+          totalSalary += Number($(this).find('td:nth-child(7)').text());
+        });
+  
+        // Add the total salary to the table.
+        $('#example tbody').append('<tr><td></td><td></td><td></td><td></td><td></td><td>Total Material Price:</td><td class="total-salary" colspan="4">' + totalSalary + '</td></tr>');
+      });
+    </script>
+  </body>
+</html>
