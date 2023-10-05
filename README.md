@@ -66,7 +66,7 @@ To run the Django Inventory App on your local machine, follow these steps:
 
 
 #### Add Contract in Contract page
-![Contract page](https://imgur.com/4zl58Cv)
+![Contract page](https://i.imgur.com/4zl58Cv.png)
 
 #### Add Material in Material inventory page
 ![Material inventory page](https://imgur.com/EWpxbqP)
