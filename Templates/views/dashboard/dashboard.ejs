@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
-    <title>Dashboard Template · Bootstrap v5.0</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sticky-footer/">
@@ -58,84 +58,105 @@
             <h1 class="h2">Dashboard</h1>
 
           </div>
-          <section>
-            <div class="page-content page-container" id="page-content">
-              <div class="padding">
-                <div class="row container d-flex justify-content-center">
-                  <div class="col-xl-12">
-                    <div class="card proj-progress-card">
-                        <div class="card-block">
-                            <div class="row">
-                                <div class="col-xl-3 col-md-6">
-                                    <h6>Completed Work</h6>
-                                    <h5 class="m-b-30 f-w-700">532<span class="text-c-green m-l-10">+1.69%</span></h5>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-c-red" style="width:25%"></div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-6">
-                                    <h6>Incomplete Work</h6>
-                                    <h5 class="m-b-30 f-w-700">4,569<span class="text-c-red m-l-10">-0.5%</span></h5>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-c-blue" style="width:65%"></div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-6">
-                                    <h6>Ongoing Work</h6>
-                                    <h5 class="m-b-30 f-w-700">89%<span class="text-c-green m-l-10">+0.99%</span></h5>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-c-green" style="width:85%"></div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-6">
-                                    <h6>Ongoing Digs</h6>
-                                    <h5 class="m-b-30 f-w-700">365<span class="text-c-green m-l-10">+0.35%</span></h5>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-c-yellow" style="width:45%"></div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-6">
-                                  <h6>Ongoing Digs</h6>
-                                  <h5 class="m-b-30 f-w-700">365<span class="text-c-green m-l-10">+0.35%</span></h5>
-                                  <div class="progress">
-                                      <div class="progress-bar bg-c-yellow" style="width:45%"></div>
-                                  </div>
-                              </div>
-                              <div class="col-xl-3 col-md-6">
-                                <h6>Ongoing Digs</h6>
-                                <h5 class="m-b-30 f-w-700">365<span class="text-c-green m-l-10">+0.35%</span></h5>
-                                <div class="progress">
-                                    <div class="progress-bar bg-c-yellow" style="width:45%"></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                              <h6>Ongoing Digs</h6>
-                              <h5 class="m-b-30 f-w-700">365<span class="text-c-green m-l-10">+0.35%</span></h5>
-                              <div class="progress">
-                                  <div class="progress-bar bg-c-yellow" style="width:45%"></div>
-                              </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                              <h6>Ongoing Digs</h6>
-                              <h5 class="m-b-30 f-w-700">365<span class="text-c-green m-l-10">+0.35%</span></h5>
-                              <div class="progress">
-                                  <div class="progress-bar bg-c-yellow" style="width:45%"></div>
-                              </div>
-                              </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-              </div>
-            </div>      
-          </section>
+         
           <div class="my-4 w-100" id="myChart" width="900" height="380"></div>
+          <%
+  const aggregatedQuantitiesByBuildingComponentAndItemName = {};
+  workArchiveRecords.forEach(contract => {
+    const buildingComponent = contract.buildingComponent;
+    const itemName = contract.itemName;
+    const quantity = contract.quantity;
+    const unit = contract.unit;
+    const unitPrice = contract.unitPrice;
+    const totalPrice = quantity * unitPrice;
 
-          <h2>Section title</h2>
-          <div class="table-responsive">
+    if (!aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent]) {
+      aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent] = {};
+    }
 
-          </div>
+    if (!aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName]) {
+      aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName] = {
+        quantity: 0,
+        unit,
+        unitPrice,
+        totalPrice: 0,
+      };
+    }
+
+    aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].quantity += quantity;
+    aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].totalPrice += totalPrice;
+  });
+
+  const ContractaggregatedQuantitiesByBuildingComponentAndItemName = {};
+  ContractArchive.forEach(contract => {
+    const buildingComponent = contract.buildingComponent;
+    const itemName = contract.itemName;
+    const quantity = contract.quantity;
+    const unit = contract.unit;
+    const unitPrice = contract.unitPrice;
+    const totalPrice = quantity * unitPrice;
+
+    if (!ContractaggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent]) {
+      ContractaggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent] = {};
+    }
+
+    if (!ContractaggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName]) {
+      ContractaggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName] = {
+        quantity: 0,
+        unit,
+        unitPrice,
+        totalPrice: 0,
+      };
+    }
+
+    ContractaggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].quantity += quantity;
+    ContractaggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].totalPrice += totalPrice;
+  });
+%>
+
+<h2>Work Progress</h2>
+<div class="table-responsive">
+  <table id="example" class="table table-striped" style="width:100%">
+    <thead>
+      <tr>
+        <th>Building Component</th>
+        <th>Item Name</th>
+        <th>Unit</th>
+        <th>Quantity</th>
+        <!-- <th>Unit Price</th>
+        <th>Total Price</th> -->
+        <th>Contract Quantity</th>
+        <th>Progress</th>
+        <th>Progress Bar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const buildingComponent in aggregatedQuantitiesByBuildingComponentAndItemName) { %>
+        <% for (const itemName in aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent]) { %>
+          <tr>
+            <td><%= buildingComponent %></td>
+            <td><%= itemName %></td>
+            <td><%= aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].unit %></td>
+            <td><%= aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].quantity %></td>
+            <!-- <td><%= aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].unitPrice %></td>
+            <td><%= aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].totalPrice %></td> -->
+            <td><%= ContractaggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].quantity %></td>
+            <td>
+              <%
+                const progress = aggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].quantity / ContractaggregatedQuantitiesByBuildingComponentAndItemName[buildingComponent][itemName].quantity * 100;
+              %>
+              <%= progress.toFixed(2) %>%
+            </td>
+            <td>
+              <progress value="<%= progress %>" max="100"></progress>
+            </td>
+          </tr>
+        <% } %>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
         </main>
       </div>
     </div>

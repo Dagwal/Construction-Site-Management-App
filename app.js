@@ -62,6 +62,15 @@ app.use(express.static(path.join(__dirname, 'Templates')));
 app.get('/', (req, res) => {
   res.render('landing/landing');
 });
+
+app.get('/contact', (req, res) => {
+  res.render('landing/contactus')
+});
+ 
+app.get('/about', (req, res) => {
+  res.render('landing/aboutus')
+})
+
 app.get('/login', ensureNotAuthenticated, (req, res) => {
   res.render('users/login');
 });
@@ -127,7 +136,7 @@ app.post('/signup', ensureNotAuthenticated, async (req, res) => {
 app.get('/dashboard', ensureAuthenticated, async (req, res) => {
 
     const workArchiveRecords = await WorkDoneArchiveTable.find();
-    const ContractArchive = await ContractArchiveTable.find();
+    const ContractArchive = await ContractTable.find();
     res.render('dashboard/dashboard', { workArchiveRecords, ContractArchive });
 });
 
@@ -222,7 +231,7 @@ app.post('/materialinventory/usedmaterials', ensureAuthenticated, async (req, re
         price
     });
 
-    await newUsedMaterial.save();
+    
     const newUsedMaterialArchive = new UsedMaterialArchiveTable({
         itemNumber: newUsedMaterial.itemNumber,
         materialName: newUsedMaterial.materialName,
@@ -231,13 +240,15 @@ app.post('/materialinventory/usedmaterials', ensureAuthenticated, async (req, re
         unitMesurment: newUsedMaterial.unitMesurment,
         price: newUsedMaterial.price,
       });
-      newUsedMaterialArchive.save();
+      
       // Update the quantity of the existing contract archive schema object, or create a new one if it does not exist.
       const usedMaterialArchive = await StockTable2.findOne({materialName: newUsedMaterialArchive.materialName, 
         materialTypeSize: newUsedMaterialArchive.materialTypeSize});
         console.log("usedMaterialArchive", usedMaterialArchive.quantity);
         console.log("newUsedMaterialArchive", newUsedMaterialArchive.quantity);
       if (usedMaterialArchive.quantity > newUsedMaterialArchive.quantity) {
+        await newUsedMaterial.save();
+        newUsedMaterialArchive.save();
         console.log("working")
         await StockTable2.findOneAndUpdate(
           { itemNumber: newUsedMaterialArchive.itemNumber, materialName: newUsedMaterialArchive.materialName, materialTypeSize: newUsedMaterialArchive.materialTypeSize,
@@ -248,13 +259,16 @@ app.post('/materialinventory/usedmaterials', ensureAuthenticated, async (req, re
         res.redirect('/materialinventory/usedmaterials');
           } else {
             // The contract quantity is less than zero.
+            console.log("not working");
             const materialRecords = await MaterialTable.find();
             const usedMaterialRecords = await UsedMaterialTable.find();
-            res.render('dashboard/usedmaterials', { message: 'Material quantity is less than zero',  materials: materialRecords, usedMaterialRecords });
+            res.render('dashboard/usedmaterials', { message: 'Cannot use more material than available.',  materials: materialRecords, usedMaterialRecords });
     } 
 } catch (error) {
     console.error(error);
-    res.status(500).json({error: "Server error"})
+    const materialRecords = await MaterialTable.find();
+    const usedMaterialRecords = await UsedMaterialTable.find();
+    res.render('dashboard/usedmaterials', { message: 'Material does not exist',  materials: materialRecords, usedMaterialRecords });
 }
 })
 
@@ -354,6 +368,13 @@ app.get('/contract/addContract', ensureAuthenticated, async (req, res) => {
   
 });
 
+app.get('/contract/totalContract', ensureAuthenticated, async (req, res) => {
+
+  const comulitiveContract = await ContractTable.find();
+  res.render('dashboard/add/totalcontract', {comulitiveContract});
+  
+});
+
 // Define a route for the stocks page
 app.get('/stock/addStock', ensureAuthenticated, async (req, res) => {
 
@@ -397,7 +418,7 @@ app.post('/works/addWorks', ensureAuthenticated, async (req, res) => {
       unitPrice,
     });
 
-    await newWorkRecord.save();
+    
 
     const newWorkArchive = new WorkDoneArchiveTable({
       itemNumber: newWorkRecord.itemNumber,
@@ -407,11 +428,13 @@ app.post('/works/addWorks', ensureAuthenticated, async (req, res) => {
       quantity: newWorkRecord.quantity,
       unitPrice: newWorkRecord.unitPrice,
     });
-        newWorkArchive.save();
+        
     // Update the quantity of the existing contract archive schema object, or create a new one if it does not exist.
     const ContractArchive = await ContractArchiveTable.findOne({buildingComponent: newWorkArchive.buildingComponent, 
       itemName: newWorkArchive.itemName});
     if (ContractArchive.quantity > newWorkArchive.quantity) {
+      await newWorkRecord.save();
+      newWorkArchive.save();
       await ContractArchiveTable.findOneAndUpdate(
         { itemNumber: newWorkArchive.itemNumber, buildingComponent: newWorkArchive.buildingComponent, itemName: newWorkArchive.itemName,
           unit: newWorkArchive.unit, unitPrice: newWorkArchive.unitPrice},

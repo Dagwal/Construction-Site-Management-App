@@ -51,15 +51,21 @@
         </h6>
         <ul class="nav flex-column mb-2">
             <li class="nav-item">
+                <a class="nav-link <%= currentPageName === 'Total Contracts' ? 'active' : '' %>" href="/contract/totalContract">
+                    <span data-feather="file-text"></span>
+                    Total Contracts
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link <%= currentPageName === 'Contract Report' ? 'active' : '' %>" href="/contract/addContract">
                     <span data-feather="file-text"></span>
-                    Contract Report
+                    Remaining Works
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link <%= currentPageName === 'Materials Report' ? 'active' : '' %>" href="/stock/addStock">
                     <span data-feather="file-text"></span>
-                    Materials Report
+                    Remaining Materials
                 </a>
             </li>
             <li class="nav-item">
@@ -77,7 +83,7 @@
             <li class="nav-item">
                 <a class="nav-link <%= currentPageName === 'Work Report' ? 'active' : '' %>" href="/works/addWorks">
                     <span data-feather="file-text"></span>
-                    Work Report
+                    Completed Works
                 </a>
             </li>
         </ul>
