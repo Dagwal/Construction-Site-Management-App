@@ -23,9 +23,9 @@
 
 The NodeJS Construction Site Managing App is a web-based application built with nodeJS framework that allows users to manage their construction site. It provides features such as tracking material inventory, tracking employees, recording daily works, generating reports, and more.
 
-[Author(s) LinkedIn]
-[Mikiyas Ayele Kore](https://www.linkedin.com/in/mikiyas-ayele)
-[Dagim Wallelgne](https://linkedin.com/in/dagim-wallelgne-218860231)
+### Authors LinkedIn
+- [Mikiyas Ayele Kore](https://www.linkedin.com/in/mikiyas-ayele)
+- [Dagim Wallelgne](https://linkedin.com/in/dagim-wallelgne-218860231)
 
 ---
 
