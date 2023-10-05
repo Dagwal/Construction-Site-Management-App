@@ -1,6 +1,6 @@
 # Construction-Site-Managing-App
 
-![Landing Page](https://imgur.com/bUdZDq7)
+![Landing Page](https://i.imgur.com/bUdZDq7.png)
 
 
 
@@ -69,16 +69,16 @@ To run the Django Inventory App on your local machine, follow these steps:
 ![Contract page](https://i.imgur.com/4zl58Cv.png)
 
 #### Add Material in Material inventory page
-![Material inventory page](https://imgur.com/EWpxbqP)
+![Material inventory page](https://i.imgur.com/EWpxbqP.png)
 
 #### Add daily works in Work Done page
-![Work Done Page](https://imgur.com/QyK6jke)
+![Work Done Page](https://i.imgur.com/QyK6jke.png)
 
 #### Add employees in Employees page
-![Work Done Page](https://imgur.com/uBMuRzh)
+![Work Done Page](https://i.imgur.com/uBMuRzh.png)
 
 #### View Progress in Dashboard page
-![Dashboard page](https://imgur.com/Zjudvrx)
+![Dashboard page](https://i.imgur.com/Zjudvrx.png)
 
 ---
 
